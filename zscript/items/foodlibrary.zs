@@ -1,6 +1,9 @@
 
 Class SinFood : SinConsumable{
 	string ingest; property Ingest : ingest; //Sound of consuming the food/drink.
+	string power1; property Power1 : power1;
+	string power2; property Power2 : power2;
+	string power3; property Power3 : power3;
 	
 	//	All properties below currently have no function.
 	//	(Numbers are measured in grams.)
@@ -32,7 +35,7 @@ Class SinFood : SinConsumable{
 		Inventory.PickupMessage "You shouldn't see this.";
 		SinItem.Description "You shouldn't see this.";
 		//	Using a Dwelling Sin sound because I can't find the path to Doom 2's sounds.
-		SinFood.Ingest "weapons/load";
+		//SinFood.Ingest "weapons/load";
 		//	Nutrients don't work yet, so this will be commented out.
 		//SinFood.Calories 0;
 	}
@@ -41,6 +44,9 @@ Class SinFood : SinConsumable{
 			let playe = SinPlayer(owner);
 			If(playe&&playe.health<playe.maxhealth){owner.GiveBody(health,playe.maxhealth);}
 			owner.A_StartSound(ingest,CHAN_AUTO,CHANF_OVERLAP);
+			owner.GiveInventory(power1,1);
+			owner.GiveInventory(power2,1);
+			owner.GiveInventory(power3,1);
 			//	Yes, this method of applying nutrients is messy, but it'll do for now.
 			//	(If I can even get it to work..)
 			/*if (calories > 0) {owner.GiveInventory("Calories",calories);}
@@ -70,27 +76,22 @@ Class SinExampleFood : SinFood{
 	Default{
 		Inventory.Icon "STIMA0";
 		Tag "Example Food";
-		Health 40;
-		Inventory.PickupMessage "Picked up a food package.";
-		SinItem.Description "This will heal 40 HP and grant Regeneration for 10 seconds.";
+		Health 1;
+		Inventory.PickupMessage "Picked up example food.";
+		SinItem.Description "[+1 HP]\n[-0% DMG]\n[+120 REG]\n[+50% SPD]";
+		SinFood.Power1 "PowerProtection";
+		SinFood.Power2 "PowerRegeneration";
+		SinFood.Power3 "PowerSpeed";
 	}
-	//	Here, we grant a powerup upon ingesting the food item.
+	//	In case 3 wasn't enough, we grant a 4th additional powerup upon ingesting the food item.
 	Override bool Use(bool pickup){
-		owner.GiveInventory("SinExamplePowerFood",1);
+		owner.GiveInventory("PowerBuddha",1);
 		//	"Super" is used to call the code of parent functions.
-		//	Always include it when overriding Use().
+		//	Always include it when overriding hooks.
 		Return Super.Use(pickup);
 		Return 0;
 	}
 	States{Spawn: STIM A -1; Stop;}
-}
-
-Class SinExamplePowerFood : PowerRegeneration{
-	Default{
-		Inventory.Icon "STIMA0";
-		Powerup.Strength 1;
-		Powerup.Duration -10;
-	}
 }
 
 Class SinExampleFoodSpawner : RandomSpawner{
@@ -102,12 +103,13 @@ Class SinExampleFoodSpawner : RandomSpawner{
 
 //	Meals.
 
-Class SinFoodWeapon : SinWeapon{
+Class SinMeal : SinWeapon{
+	
 	Default{
 		Inventory.Icon "MEDIA0";
-		Tag "Food Weapon";
+		Tag "Meal";
 		Inventory.PickupSound "misc/i_pkup";
-		AttackSound "Eatstim";
+		AttackSound "weapons/load";
 		Inventory.Amount 2;
 		Inventory.MaxAmount 2;
 		Inventory.PickupMessage "You shouldn't see this.";
@@ -125,11 +127,11 @@ Class SinFoodWeapon : SinWeapon{
 	}
 }
 
-Class SinExampleFoodWeapon : SinFoodWeapon{
+Class SinExampleFoodWeapon : SinMeal{
 	Default{
 		Inventory.Icon "STIMA0";
 		Tag "You shouldn't see this";
-		AttackSound "items/eatapple";
+		AttackSound "weapons/load";
 		Inventory.Amount 16;
 		Inventory.MaxAmount 16;
 		Inventory.PickupMessage "You shouldn't see this.";
