@@ -4,6 +4,8 @@ Class SinFood : SinConsumable{
 	string power1; property Power1 : power1;
 	string power2; property Power2 : power2;
 	string power3; property Power3 : power3;
+	int bonushealth; property BonusHealth : bonushealth; //	Similr to SinHealing's healmax, except this can be used on its own.
+	int maxbonushealth; property BonusHealthMax : maxbonushealth;
 	
 	//	All properties below currently have no function.
 	//	(Numbers are measured in grams.)
@@ -38,11 +40,14 @@ Class SinFood : SinConsumable{
 		//SinFood.Ingest "weapons/load";
 		//	Nutrients don't work yet, so this will be commented out.
 		//SinFood.Calories 0;
+		SinFood.BonusHealthMax 50;
 	}
 	Override bool Use(bool pickup){
 		If(owner){
 			let playe = SinPlayer(owner);
 			If(playe&&playe.health<playe.maxhealth){owner.GiveBody(health,playe.maxhealth);}
+			//	Bonus Health scales with Player Max Health. (50 * 50 / 8 = 312)
+			owner.GiveBody(bonushealth,maxbonushealth*playe.maxhealth/8);
 			owner.A_StartSound(ingest,CHAN_AUTO,CHANF_OVERLAP);
 			owner.GiveInventory(power1,1);
 			owner.GiveInventory(power2,1);
