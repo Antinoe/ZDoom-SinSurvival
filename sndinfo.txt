@@ -1,0 +1,134 @@
+
+//
+//	Generic
+//
+
+items/food/swallow "sounds/generic/food/swallow/swallow1.wav"
+
+items/food/chew1 "sounds/generic/food/chew/chew1.wav"
+items/food/chew2 "sounds/generic/food/chew/chew2.wav"
+items/food/chew3 "sounds/generic/food/chew/chew3.wav"
+items/food/chew4 "sounds/generic/food/chew/chew4.wav"
+items/food/chew5 "sounds/generic/food/chew/chew5.wav"
+$random items/food/chew
+{
+	items/food/chew1
+	items/food/chew2
+	items/food/chew3
+	items/food/chew4
+	items/food/chew5
+}
+
+items/food/apple1 "sounds/generic/food/bite/apple/apple1.wav"
+items/food/apple2 "sounds/generic/food/bite/apple/apple2.wav"
+items/food/apple3 "sounds/generic/food/bite/apple/apple3.wav"
+$random items/food/apple
+{
+	items/food/apple1
+	items/food/apple2
+	items/food/apple3
+}
+
+items/food/carrot1 "sounds/generic/food/bite/carrot/carrot1.wav"
+items/food/carrot2 "sounds/generic/food/bite/carrot/carrot2.wav"
+items/food/carrot3 "sounds/generic/food/bite/carrot/carrot3.wav"
+items/food/carrot4 "sounds/generic/food/bite/carrot/carrot4.wav"
+items/food/carrot5 "sounds/generic/food/bite/carrot/carrot5.wav"
+items/food/carrot6 "sounds/generic/food/bite/carrot/carrot6.wav"
+items/food/carrot7 "sounds/generic/food/bite/carrot/carrot7.wav"
+$random items/food/carrot
+{
+	items/food/carrot1
+	items/food/carrot2
+	items/food/carrot3
+	items/food/carrot4
+	items/food/carrot5
+	items/food/carrot6
+	items/food/carrot7
+}
+
+items/food/celery1 "sounds/generic/food/bite/celery/celery1.wav"
+items/food/celery2 "sounds/generic/food/bite/celery/celery2.wav"
+$random items/food/celery
+{
+	items/food/celery1
+	items/food/celery2
+}
+
+items/food/peach1 "sounds/generic/food/bite/peach/peach1.wav"
+items/food/peach2 "sounds/generic/food/bite/peach/peach2.wav"
+items/food/peach3 "sounds/generic/food/bite/peach/peach3.wav"
+items/food/peach4 "sounds/generic/food/bite/peach/peach4.wav"
+items/food/peach5 "sounds/generic/food/bite/peach/peach5.wav"
+items/food/peach6 "sounds/generic/food/bite/peach/peach6.wav"
+items/food/peach7 "sounds/generic/food/bite/peach/peach7.wav"
+items/food/peach8 "sounds/generic/food/bite/peach/peach8.wav"
+items/food/peach9 "sounds/generic/food/bite/peach/peach9.wav"
+items/food/peach10 "sounds/generic/food/bite/peach/peach10.wav"
+items/food/peach11 "sounds/generic/food/bite/peach/peach11.wav"
+items/food/peach12 "sounds/generic/food/bite/peach/peach12.wav"
+$random items/food/peach
+{
+	items/food/peach1
+	items/food/peach2
+	items/food/peach3
+	items/food/peach4
+	items/food/peach5
+	items/food/peach6
+	items/food/peach7
+	items/food/peach8
+	items/food/peach9
+	items/food/peach10
+	items/food/peach11
+	items/food/peach12
+}
+
+items/food/pear1 "sounds/generic/food/bite/pear/pear1.wav"
+items/food/pear2 "sounds/generic/food/bite/pear/pear2.wav"
+items/food/pear3 "sounds/generic/food/bite/pear/pear3.wav"
+items/food/pear4 "sounds/generic/food/bite/pear/pear4.wav"
+items/food/pear5 "sounds/generic/food/bite/pear/pear5.wav"
+$random items/food/pear
+{
+	items/food/pear1
+	items/food/pear2
+	items/food/pear3
+	items/food/pear4
+	items/food/pear5
+}
+
+//
+//	Other
+//
+
+items/plasticwrapper "Sounds/DavidGallie/PlasticWrapper.mp3"
+items/cardboardimpact "Sounds/Pixabay/CardboardImpact.mp3"
+items/food/eatcrunchy "Sounds/Pixabay/Food/EatCrunchy.mp3"
+items/food/heavyswallow "Sounds/Pixabay/Food/HeavySwallow.mp3"
+items/food/eatcracker "Sounds/Pixabay/Food/EatCrackerMouthClosed.mp3"
+items/food/slurpshake "Sounds/Pixabay/Food/SlurpShake.mp3"
+
+items/food/eatapple1 "Sounds/Pixabay/Food/EatApple1.mp3"
+items/food/eatapple2 "Sounds/Pixabay/Food/EatApple2.mp3"
+$random items/food/eatapple
+{
+	items/food/eatapple1
+	items/food/eatapple2
+}
+
+items/food/eatcarrot1 "Sounds/Pixabay/Food/EatCarrot1.mp3"
+items/food/eatcarrot2 "Sounds/Pixabay/Food/EatCarrot2.mp3"
+$random items/food/eatcarrot
+{
+	items/food/eatcarrot1
+	items/food/eatcarrot2
+}
+
+
+items/food/eatchips1 "Sounds/Pixabay/Food/EatChips1.mp3"
+items/food/eatchips2 "Sounds/Pixabay/Food/EatChips2.mp3"
+$random items/food/eatchips
+{
+	items/food/eatchips1
+	items/food/eatchips2
+}

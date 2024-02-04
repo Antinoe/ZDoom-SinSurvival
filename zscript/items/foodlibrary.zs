@@ -1,10 +1,11 @@
 
 Class SinFood : SinConsumable{
-	string ingest; property Ingest : ingest; //Sound of consuming the food/drink.
+	string ingest; property Ingest : ingest; //	Sound Sequence upon consuming food/drink.
+	string ingestbasic; property IngestBasic : ingestbasic; //	Single sound of consuming food/drink.
 	string power1; property Power1 : power1;
 	string power2; property Power2 : power2;
 	string power3; property Power3 : power3;
-	int bonushealth; property BonusHealth : bonushealth; //	Similr to SinHealing's healmax, except this can be used on its own.
+	int bonushealth; property BonusHealth : bonushealth; //	Similar to SinHealing's healmax, except this can be used on its own.
 	int maxbonushealth; property BonusHealthMax : maxbonushealth;
 	
 	//	All properties below currently have no function.
@@ -37,7 +38,7 @@ Class SinFood : SinConsumable{
 		Inventory.PickupMessage "You shouldn't see this.";
 		SinItem.Description "You shouldn't see this.";
 		//	Using a Dwelling Sin sound because I can't find the path to Doom 2's sounds.
-		//SinFood.Ingest "weapons/load";
+		//SinFood.IngestBasic "weapons/load";
 		//	Nutrients don't work yet, so this will be commented out.
 		//SinFood.Calories 0;
 		SinFood.BonusHealthMax 50;
@@ -48,7 +49,8 @@ Class SinFood : SinConsumable{
 			If(playe&&playe.health<playe.maxhealth){owner.GiveBody(health,playe.maxhealth);}
 			//	Bonus Health scales with Player Max Health. (50 * 50 / 8 = 312)
 			owner.GiveBody(bonushealth,maxbonushealth*playe.maxhealth/8);
-			owner.A_StartSound(ingest,CHAN_AUTO,CHANF_OVERLAP);
+			owner.GiveInventory(ingest,1);
+			owner.A_StartSound(ingestbasic,CHAN_AUTO,CHANF_OVERLAP);
 			owner.GiveInventory(power1,1);
 			owner.GiveInventory(power2,1);
 			owner.GiveInventory(power3,1);
@@ -106,7 +108,9 @@ Class SinExampleFoodSpawner : RandomSpawner{
 	}
 }
 
-//	Meals.
+//
+//	Meals
+//
 
 Class SinMeal : SinWeapon{
 	
@@ -145,5 +149,79 @@ Class SinExampleFoodWeapon : SinMeal{
 	States{Spawn: STIM A -1; Stop;}
 	Override void WeaponFire(SinPlayer shooter, SinHands gun){
 		Super.WeaponFire(shooter,gun);
+	}
+}
+
+//
+//	Eating/Drinking Sound Sequences
+//
+
+Class PowerEating : PowerRegeneration
+{
+	string sound; property Sound : sound;
+	Default
+	{
+		Powerup.Duration -2;
+		Powerup.Strength 0;
+		//Inventory.Icon "STIMA0";
+		//PowerEating.Sound "items/food/chew";
+	}
+	Override void DoEffect(){
+		Super.DoEffect();
+		//owner.A_StartSound("items/food/chew",CHAN_AUTO,CHANF_OVERLAP);
+		If(EffectTics == 70){
+			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
+		}
+		If(EffectTics == 50){
+			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
+		}
+		If(EffectTics == 30){
+			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
+		}
+		If(EffectTics == 10){
+			owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
+		}
+	}
+}
+Class EatGeneric : PowerEating
+{
+	Default
+	{
+		PowerEating.Sound "items/food/chew";
+	}
+}
+Class EatApple : PowerEating
+{
+	Default
+	{
+		PowerEating.Sound "items/food/apple";
+	}
+}
+Class EatCarrot : PowerEating
+{
+	Default
+	{
+		PowerEating.Sound "items/food/carrot";
+	}
+}
+Class EatCelery : PowerEating
+{
+	Default
+	{
+		PowerEating.Sound "items/food/celery";
+	}
+}
+Class EatPeach : PowerEating
+{
+	Default
+	{
+		PowerEating.Sound "items/food/peach";
+	}
+}
+Class EatPear : PowerEating
+{
+	Default
+	{
+		PowerEating.Sound "items/food/pear";
 	}
 }
