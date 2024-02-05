@@ -172,13 +172,13 @@ Class PowerEating : PowerRegeneration
 		If(EffectTics == 70){
 			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
 		}
-		If(EffectTics == 50){
+		If(EffectTics == 55){
 			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
 		}
-		If(EffectTics == 30){
+		If(EffectTics == 40){
 			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
 		}
-		If(EffectTics == 10){
+		If(EffectTics == 25){
 			owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
 		}
 	}
