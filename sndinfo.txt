@@ -101,7 +101,7 @@ $random items/food/pear
 //	Other
 //
 
-items/plasticwrapper "Sounds/DavidGallie/PlasticWrapper.mp3"
+items/plasticwrapper "Sounds/Pixabay/DavidGallie/PlasticWrapper.mp3"
 items/cardboardimpact "Sounds/Pixabay/CardboardImpact.mp3"
 items/food/eatcrunchy "Sounds/Pixabay/Food/EatCrunchy.mp3"
 items/food/heavyswallow "Sounds/Pixabay/Food/HeavySwallow.mp3"
