@@ -167,8 +167,44 @@ Class PowerEating : PowerRegeneration
 		//PowerEating.Sound "items/food/chew";
 	}
 	Override void DoEffect(){
-		Super.DoEffect();
+		//Super.DoEffect();
 		//owner.A_StartSound("items/food/chew",CHAN_AUTO,CHANF_OVERLAP);
+		If(EffectTics == 70){
+			owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
+		}
+	}
+}
+Class PowerEatingDouble : PowerEating
+{
+	Override void DoEffect(){
+		//Super.DoEffect();
+		If(EffectTics == 70){
+			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
+		}
+		If(EffectTics == 55){
+			owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
+		}
+	}
+}
+Class PowerEatingTriple : PowerEating
+{
+	Override void DoEffect(){
+		//Super.DoEffect();
+		If(EffectTics == 70){
+			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
+		}
+		If(EffectTics == 55){
+			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
+		}
+		If(EffectTics == 40){
+			owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
+		}
+	}
+}
+Class PowerEatingQuadruple : PowerEating
+{
+	Override void DoEffect(){
+		//Super.DoEffect();
 		If(EffectTics == 70){
 			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
 		}
@@ -183,45 +219,10 @@ Class PowerEating : PowerRegeneration
 		}
 	}
 }
-Class EatGeneric : PowerEating
-{
-	Default
-	{
-		PowerEating.Sound "items/food/chew";
-	}
-}
-Class EatApple : PowerEating
-{
-	Default
-	{
-		PowerEating.Sound "items/food/apple";
-	}
-}
-Class EatCarrot : PowerEating
-{
-	Default
-	{
-		PowerEating.Sound "items/food/carrot";
-	}
-}
-Class EatCelery : PowerEating
-{
-	Default
-	{
-		PowerEating.Sound "items/food/celery";
-	}
-}
-Class EatPeach : PowerEating
-{
-	Default
-	{
-		PowerEating.Sound "items/food/peach";
-	}
-}
-Class EatPear : PowerEating
-{
-	Default
-	{
-		PowerEating.Sound "items/food/pear";
-	}
-}
+Class EatGenericSingle : PowerEating	{Default{PowerEating.Sound "items/food/chew";}}
+Class EatGeneric : PowerEatingTriple	{Default{PowerEating.Sound "items/food/chew";}}
+Class EatApple : PowerEatingQuadruple	{Default{PowerEating.Sound "items/food/apple";}}
+Class EatCarrot : PowerEatingQuadruple	{Default{PowerEating.Sound "items/food/carrot";}}
+Class EatCelery : PowerEatingDouble	{Default{PowerEating.Sound "items/food/celery";}}
+Class EatPeach : PowerEatingQuadruple	{Default{PowerEating.Sound "items/food/peach";}}
+Class EatPear : PowerEatingQuadruple	{Default{PowerEating.Sound "items/food/pear";}}
