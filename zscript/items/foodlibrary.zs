@@ -46,7 +46,7 @@ Class SinFood : SinConsumable{
 	Override bool Use(bool pickup){
 		If(owner){
 			let playe = SinPlayer(owner);
-			If(playe&&playe.health<playe.maxhealth){owner.GiveBody(health,playe.maxhealth);}
+			//If(playe&&playe.health<playe.maxhealth){owner.GiveBody(health,playe.maxhealth);}
 			//	Bonus Health scales with Player Max Health. (50 * 50 / 8 = 312)
 			owner.GiveBody(bonushealth,maxbonushealth*playe.maxhealth/8);
 			owner.GiveInventory(ingest,1);
