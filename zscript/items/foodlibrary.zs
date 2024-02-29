@@ -86,9 +86,10 @@ Class SinExampleFood : SinFood{
 	Default{
 		Inventory.Icon "STIMA0";
 		Tag "Example Food";
-		Health 1;
 		Inventory.PickupMessage "Picked up example food.";
-		SinItem.Description "[+1 HP]\n[-0% DMG]\n[+120 REG]\n[+50% SPD]";
+		SinFood.BonusHealth 20;
+		SinFood.Ingest "EatGeneric";
+		SinItem.Description "[+20 BNS HP]\n[-0% DMG]\n[+120 REG]\n[+50% SPD]";
 		SinFood.Power1 "PowerProtection";
 		SinFood.Power2 "PowerRegeneration";
 		SinFood.Power3 "PowerSpeed";
