@@ -48,7 +48,10 @@ Class SinFood : SinConsumable{
 			let playe = SinPlayer(owner);
 			//If(playe&&playe.health<playe.maxhealth){owner.GiveBody(health,playe.maxhealth);}
 			//	Bonus Health scales with Player Max Health. (50 * 50 / 8 = 312)
-			owner.GiveBody(bonushealth,maxbonushealth*playe.maxhealth/8);
+			//	I think I'll use the 9999 formula instead for now.
+			//owner.GiveBody(bonushealth,maxbonushealth*playe.maxhealth/8);
+			//	Food will never go to waste.
+			owner.GiveBody(bonushealth,9999);
 			owner.GiveInventory(ingest,1);
 			owner.A_StartSound(ingestbasic,CHAN_AUTO,CHANF_OVERLAP);
 			owner.GiveInventory(power1,1);
@@ -166,57 +169,45 @@ Class PowerEating : PowerRegeneration
 		//Inventory.Icon "STIMA0";
 		//PowerEating.Sound "items/food/chew";
 	}
+	Virtual void Bite(){
+		owner.GiveBody(random(1,3),9999);
+		owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
+	}
+	Virtual void Swallow(){
+		owner.GiveBody(random(1,3),9999);
+		owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
+	}
 	Override void DoEffect(){
 		//Super.DoEffect();
 		//owner.A_StartSound("items/food/chew",CHAN_AUTO,CHANF_OVERLAP);
-		If(EffectTics == 70){
-			owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
-		}
+		If(EffectTics == 70){Swallow();}
 	}
 }
 Class PowerEatingDouble : PowerEating
 {
 	Override void DoEffect(){
 		//Super.DoEffect();
-		If(EffectTics == 70){
-			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
-		}
-		If(EffectTics == 55){
-			owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
-		}
+		If(EffectTics == 70){Bite();}
+		If(EffectTics == 55){Swallow();}
 	}
 }
 Class PowerEatingTriple : PowerEating
 {
 	Override void DoEffect(){
 		//Super.DoEffect();
-		If(EffectTics == 70){
-			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
-		}
-		If(EffectTics == 55){
-			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
-		}
-		If(EffectTics == 40){
-			owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
-		}
+		If(EffectTics == 70){Bite();}
+		If(EffectTics == 55){Bite();}
+		If(EffectTics == 40){Swallow();}
 	}
 }
 Class PowerEatingQuadruple : PowerEating
 {
 	Override void DoEffect(){
 		//Super.DoEffect();
-		If(EffectTics == 70){
-			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
-		}
-		If(EffectTics == 55){
-			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
-		}
-		If(EffectTics == 40){
-			owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
-		}
-		If(EffectTics == 25){
-			owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
-		}
+		If(EffectTics == 70){Bite();}
+		If(EffectTics == 55){Bite();}
+		If(EffectTics == 40){Bite();}
+		If(EffectTics == 25){Swallow();}
 	}
 }
 Class EatGenericSingle : PowerEating	{Default{PowerEating.Sound "items/food/chew";}}
