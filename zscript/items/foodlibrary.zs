@@ -75,6 +75,7 @@ Class SinFood : SinConsumable{
 			}
 			Return 1;
 		}
+		HandleSprite(pickup);
 		//	This might be unnecessary.
 		Return Super.Use(pickup);
 		Return 0;
