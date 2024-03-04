@@ -1,0 +1,6 @@
+
+//
+//	General
+//
+server int sinfood_bitehealmin = 1;
+server int sinfood_bitehealmax = 1;

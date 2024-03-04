@@ -172,11 +172,11 @@ Class PowerEating : PowerRegeneration
 		//PowerEating.Sound "items/food/chew";
 	}
 	Virtual void Bite(){
-		owner.GiveBody(random(1,3),9999);
+		owner.GiveBody(random(sinfood_bitehealmin,sinfood_bitehealmax),9999);
 		owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
 	}
 	Virtual void Swallow(){
-		owner.GiveBody(random(1,3),9999);
+		owner.GiveBody(random(sinfood_bitehealmin,sinfood_bitehealmax),9999);
 		owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
 	}
 	Override void DoEffect(){

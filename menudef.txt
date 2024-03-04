@@ -1,0 +1,36 @@
+
+AddOptionMenu "OptionsMenu"{
+	Submenu "Food Library","SinFoodOptions"
+}
+OptionMenu "SinFoodOptions"{
+	Title "Food Library"
+	StaticText "A library for making DSin food items."
+	Submenu "General","SinFoodOptionsGeneral"
+}
+OptionMenu "SinFoodOptionsGeneral"{
+	/*
+	Option "Minimum Bite Heal Amount","sinfood_bitehealmin","BiteHealMin"
+	Option "Maximum Bite Heal Amount","sinfood_bitehealmax","BiteHealMax"
+	*/
+	Slider "Minimum Bite Heal Amount","sinfood_bitehealmin",1,10,1,0
+	Slider "Maximum Bite Heal Amount","sinfood_bitehealmax",1,10,1,0
+	StaticText "Every time you bite into food, Bonus Health is given to you."
+	StaticText "The sliders above control just how much you're granted."
+	StaticText "(Default: 1,1)"
+}
+/*
+OptionValue "BiteHealMin"{
+	1,"1"
+	2,"2"
+	3,"3"
+	4,"4"
+	5,"5"
+}
+OptionValue "BiteHealMax"{
+	1,"1"
+	2,"2"
+	3,"3"
+	4,"4"
+	5,"5"
+}
+*/
