@@ -1,6 +1,6 @@
 
 //
-//	Generic
+//	Food
 //
 
 items/food/swallow "sounds/generic/food/swallow/swallow1.wav"
@@ -95,6 +95,206 @@ $random items/food/pear
 	items/food/pear3
 	items/food/pear4
 	items/food/pear5
+}
+
+//
+//	Drinks
+//
+
+items/drinks/cork1 "sounds/generic/drinks/cork/cork1.wav"
+items/drinks/cork2 "sounds/generic/drinks/cork/cork2.wav"
+items/drinks/cork3 "sounds/generic/drinks/cork/cork3.wav"
+items/drinks/cork4 "sounds/generic/drinks/cork/cork4.wav"
+items/drinks/cork5 "sounds/generic/drinks/cork/cork5.wav"
+items/drinks/cork6 "sounds/generic/drinks/cork/cork6.wav"
+items/drinks/cork7 "sounds/generic/drinks/cork/cork7.wav"
+items/drinks/cork8 "sounds/generic/drinks/cork/cork8.wav"
+items/drinks/cork9 "sounds/generic/drinks/cork/cork9.wav"
+items/drinks/cork10 "sounds/generic/drinks/cork/cork10.wav"
+items/drinks/cork11 "sounds/generic/drinks/cork/cork11.wav"
+items/drinks/cork12 "sounds/generic/drinks/cork/cork12.wav"
+items/drinks/cork13 "sounds/generic/drinks/cork/cork13.wav"
+items/drinks/cork14 "sounds/generic/drinks/cork/cork14.wav"
+items/drinks/cork15 "sounds/generic/drinks/cork/cork15.wav"
+items/drinks/cork16 "sounds/generic/drinks/cork/cork16.wav"
+items/drinks/cork17 "sounds/generic/drinks/cork/cork17.wav"
+$random items/drinks/cork
+{
+	items/drinks/cork1
+	items/drinks/cork2
+	items/drinks/cork3
+	items/drinks/cork4
+	items/drinks/cork5
+	items/drinks/cork6
+	items/drinks/cork7
+	items/drinks/cork8
+	items/drinks/cork9
+	items/drinks/cork10
+	items/drinks/cork11
+	items/drinks/cork12
+	items/drinks/cork13
+	items/drinks/cork14
+	items/drinks/cork15
+	items/drinks/cork16
+	items/drinks/cork17
+}
+
+items/drinks/corkpop1 "sounds/generic/drinks/corkpop/corkpop1.wav"
+items/drinks/corkpop2 "sounds/generic/drinks/corkpop/corkpop2.wav"
+items/drinks/corkpop3 "sounds/generic/drinks/corkpop/corkpop3.wav"
+items/drinks/corkpop4 "sounds/generic/drinks/corkpop/corkpop4.wav"
+items/drinks/corkpop5 "sounds/generic/drinks/corkpop/corkpop5.wav"
+items/drinks/corkpop6 "sounds/generic/drinks/corkpop/corkpop6.wav"
+items/drinks/corkpop7 "sounds/generic/drinks/corkpop/corkpop7.wav"
+items/drinks/corkpop8 "sounds/generic/drinks/corkpop/corkpop8.wav"
+items/drinks/corkpop9 "sounds/generic/drinks/corkpop/corkpop9.wav"
+items/drinks/corkpop10 "sounds/generic/drinks/corkpop/corkpop10.wav"
+items/drinks/corkpop11 "sounds/generic/drinks/corkpop/corkpop11.wav"
+$random items/drinks/corkpop
+{
+	items/drinks/corkpop1
+	items/drinks/corkpop2
+	items/drinks/corkpop3
+	items/drinks/corkpop4
+	items/drinks/corkpop5
+	items/drinks/corkpop6
+	items/drinks/corkpop7
+	items/drinks/corkpop8
+	items/drinks/corkpop9
+	items/drinks/corkpop10
+	items/drinks/corkpop11
+}
+
+items/drinks/corkslosh1 "sounds/generic/drinks/corkslosh/corkslosh1.wav"
+items/drinks/corkslosh2 "sounds/generic/drinks/corkslosh/corkslosh2.wav"
+items/drinks/corkslosh3 "sounds/generic/drinks/corkslosh/corkslosh3.wav"
+items/drinks/corkslosh4 "sounds/generic/drinks/corkslosh/corkslosh4.wav"
+$random items/drinks/corkslosh
+{
+	items/drinks/corkslosh1
+	items/drinks/corkslosh2
+	items/drinks/corkslosh3
+	items/drinks/corkslosh4
+}
+
+items/drinks/pour1 "sounds/generic/drinks/pour/pour1.wav"
+items/drinks/pour2 "sounds/generic/drinks/pour/pour2.wav"
+items/drinks/pour3 "sounds/generic/drinks/pour/pour3.wav"
+items/drinks/pour4 "sounds/generic/drinks/pour/pour4.wav"
+items/drinks/pour5 "sounds/generic/drinks/pour/pour5.wav"
+items/drinks/pour6 "sounds/generic/drinks/pour/pour6.wav"
+items/drinks/pour7 "sounds/generic/drinks/pour/pour7.wav"
+items/drinks/pour8 "sounds/generic/drinks/pour/pour8.wav"
+items/drinks/pour9 "sounds/generic/drinks/pour/pour9.wav"
+$random items/drinks/pour
+{
+	items/drinks/pour1
+	items/drinks/pour2
+	items/drinks/pour3
+	items/drinks/pour4
+	items/drinks/pour5
+	items/drinks/pour6
+	items/drinks/pour7
+	items/drinks/pour8
+	items/drinks/pour9
+}
+
+items/drinks/sip1 "sounds/generic/drinks/sip/sip1.wav"
+items/drinks/sip2 "sounds/generic/drinks/sip/sip2.wav"
+items/drinks/sip3 "sounds/generic/drinks/sip/sip3.wav"
+items/drinks/sip4 "sounds/generic/drinks/sip/sip4.wav"
+items/drinks/sip5 "sounds/generic/drinks/sip/sip5.wav"
+items/drinks/sip6 "sounds/generic/drinks/sip/sip6.wav"
+items/drinks/sip7 "sounds/generic/drinks/sip/sip7.wav"
+items/drinks/sip8 "sounds/generic/drinks/sip/sip8.wav"
+items/drinks/sip9 "sounds/generic/drinks/sip/sip9.wav"
+items/drinks/sip10 "sounds/generic/drinks/sip/sip10.wav"
+items/drinks/sip11 "sounds/generic/drinks/sip/sip11.wav"
+items/drinks/sip12 "sounds/generic/drinks/sip/sip12.wav"
+items/drinks/sip13 "sounds/generic/drinks/sip/sip13.wav"
+items/drinks/sip14 "sounds/generic/drinks/sip/sip14.wav"
+items/drinks/sip15 "sounds/generic/drinks/sip/sip15.wav"
+items/drinks/sip16 "sounds/generic/drinks/sip/sip16.wav"
+items/drinks/sip17 "sounds/generic/drinks/sip/sip17.wav"
+items/drinks/sip18 "sounds/generic/drinks/sip/sip18.wav"
+$random items/drinks/sip
+{
+	items/drinks/sip1
+	items/drinks/sip2
+	items/drinks/sip3
+	items/drinks/sip4
+	items/drinks/sip5
+	items/drinks/sip6
+	items/drinks/sip7
+	items/drinks/sip8
+	items/drinks/sip9
+	items/drinks/sip10
+	items/drinks/sip11
+	items/drinks/sip12
+	items/drinks/sip13
+	items/drinks/sip14
+	items/drinks/sip15
+	items/drinks/sip16
+	items/drinks/sip17
+	items/drinks/sip18
+}
+
+items/drinks/slosh1 "sounds/generic/drinks/slosh/slosh1.wav"
+items/drinks/slosh2 "sounds/generic/drinks/slosh/slosh2.wav"
+items/drinks/slosh3 "sounds/generic/drinks/slosh/slosh3.wav"
+items/drinks/slosh4 "sounds/generic/drinks/slosh/slosh4.wav"
+items/drinks/slosh5 "sounds/generic/drinks/slosh/slosh5.wav"
+items/drinks/slosh6 "sounds/generic/drinks/slosh/slosh6.wav"
+items/drinks/slosh7 "sounds/generic/drinks/slosh/slosh7.wav"
+items/drinks/slosh8 "sounds/generic/drinks/slosh/slosh8.wav"
+items/drinks/slosh9 "sounds/generic/drinks/slosh/slosh9.wav"
+items/drinks/slosh10 "sounds/generic/drinks/slosh/slosh10.wav"
+items/drinks/slosh11 "sounds/generic/drinks/slosh/slosh11.wav"
+items/drinks/slosh12 "sounds/generic/drinks/slosh/slosh12.wav"
+items/drinks/slosh13 "sounds/generic/drinks/slosh/slosh13.wav"
+items/drinks/slosh14 "sounds/generic/drinks/slosh/slosh14.wav"
+items/drinks/slosh15 "sounds/generic/drinks/slosh/slosh15.wav"
+items/drinks/slosh16 "sounds/generic/drinks/slosh/slosh16.wav"
+items/drinks/slosh17 "sounds/generic/drinks/slosh/slosh17.wav"
+items/drinks/slosh18 "sounds/generic/drinks/slosh/slosh18.wav"
+$random items/drinks/slosh
+{
+	items/drinks/slosh1
+	items/drinks/slosh2
+	items/drinks/slosh3
+	items/drinks/slosh4
+	items/drinks/slosh5
+	items/drinks/slosh6
+	items/drinks/slosh7
+	items/drinks/slosh8
+	items/drinks/slosh9
+	items/drinks/slosh10
+	items/drinks/slosh11
+	items/drinks/slosh12
+	items/drinks/slosh13
+	items/drinks/slosh14
+	items/drinks/slosh15
+	items/drinks/slosh16
+	items/drinks/slosh17
+	items/drinks/slosh18
+}
+
+items/drinks/stir1 "sounds/generic/drinks/stir/stir1.wav"
+
+items/drinks/swallow1 "sounds/generic/drinks/swallow/swallow1.wav"
+items/drinks/swallow2 "sounds/generic/drinks/swallow/swallow2.wav"
+items/drinks/swallow3 "sounds/generic/drinks/swallow/swallow3.wav"
+items/drinks/swallow4 "sounds/generic/drinks/swallow/swallow4.wav"
+items/drinks/swallow5 "sounds/generic/drinks/swallow/swallow5.wav"
+items/drinks/swallow6 "sounds/generic/drinks/swallow/swallow6.wav"
+$random items/drinks/swallow
+{
+	items/drinks/swallow1
+	items/drinks/swallow2
+	items/drinks/swallow3
+	items/drinks/swallow4
+	items/drinks/swallow5
+	items/drinks/swallow6
 }
 
 //
