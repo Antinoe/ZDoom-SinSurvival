@@ -117,7 +117,6 @@ items/drinks/cork13 "sounds/generic/drinks/cork/cork13.wav"
 items/drinks/cork14 "sounds/generic/drinks/cork/cork14.wav"
 items/drinks/cork15 "sounds/generic/drinks/cork/cork15.wav"
 items/drinks/cork16 "sounds/generic/drinks/cork/cork16.wav"
-items/drinks/cork17 "sounds/generic/drinks/cork/cork17.wav"
 $random items/drinks/cork
 {
 	items/drinks/cork1
@@ -136,7 +135,6 @@ $random items/drinks/cork
 	items/drinks/cork14
 	items/drinks/cork15
 	items/drinks/cork16
-	items/drinks/cork17
 }
 
 items/drinks/corkpop1 "sounds/generic/drinks/corkpop/corkpop1.wav"
