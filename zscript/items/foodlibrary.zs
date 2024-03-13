@@ -163,59 +163,38 @@ Class SinExampleFoodWeapon : SinMeal{
 
 Class PowerEating : PowerRegeneration
 {
-	string sound; property Sound : sound;
+	//	Every time you bite/drink.
+	string biteSound; property BiteSound : biteSound;
+	//	Every time you swallow.
+	string swallowSound; property SwallowSound : swallowSound;
 	Default
 	{
-		Powerup.Duration -2;
+		Powerup.Duration 70;
 		Powerup.Strength 0;
 		//Inventory.Icon "STIMA0";
-		//PowerEating.Sound "items/food/chew";
+		//PowerEating.BiteSound "items/food/chew";
+		//PowerEating.SwallowSound "items/food/swallow";
 	}
 	Virtual void Bite(){
 		owner.GiveBody(random(sinfood_bitehealmin,sinfood_bitehealmax),9999);
-		owner.A_StartSound(sound,CHAN_AUTO,CHANF_OVERLAP);
+		owner.A_StartSound(biteSound,CHAN_AUTO,CHANF_OVERLAP);
 	}
 	Virtual void Swallow(){
 		owner.GiveBody(random(sinfood_bitehealmin,sinfood_bitehealmax),9999);
-		owner.A_StartSound("items/food/swallow",CHAN_AUTO,CHANF_OVERLAP);
+		owner.A_StartSound(swallowSound,CHAN_AUTO,CHANF_OVERLAP);
 	}
 	Override void DoEffect(){
-		//Super.DoEffect();
-		//owner.A_StartSound("items/food/chew",CHAN_AUTO,CHANF_OVERLAP);
-		If(EffectTics == 70){Swallow();}
-	}
-}
-Class PowerEatingDouble : PowerEating
-{
-	Override void DoEffect(){
-		//Super.DoEffect();
-		If(EffectTics == 70){Bite();}
-		If(EffectTics == 55){Swallow();}
-	}
-}
-Class PowerEatingTriple : PowerEating
-{
-	Override void DoEffect(){
-		//Super.DoEffect();
-		If(EffectTics == 70){Bite();}
-		If(EffectTics == 55){Bite();}
-		If(EffectTics == 40){Swallow();}
-	}
-}
-Class PowerEatingQuadruple : PowerEating
-{
-	Override void DoEffect(){
-		//Super.DoEffect();
-		If(EffectTics == 70){Bite();}
-		If(EffectTics == 55){Bite();}
+		If(EffectTics == 80){Bite();}
+		If(EffectTics == 60){Bite();}
 		If(EffectTics == 40){Bite();}
-		If(EffectTics == 25){Swallow();}
+		If(EffectTics == 20){Swallow();}
+		//Super.DoEffect();
 	}
 }
-Class EatGenericSingle : PowerEating	{Default{PowerEating.Sound "items/food/chew";}}
-Class EatGeneric : PowerEatingTriple	{Default{PowerEating.Sound "items/food/chew";}}
-Class EatApple : PowerEatingQuadruple	{Default{PowerEating.Sound "items/food/apple";}}
-Class EatCarrot : PowerEatingQuadruple	{Default{PowerEating.Sound "items/food/carrot";}}
-Class EatCelery : PowerEatingDouble	{Default{PowerEating.Sound "items/food/celery";}}
-Class EatPeach : PowerEatingQuadruple	{Default{PowerEating.Sound "items/food/peach";}}
-Class EatPear : PowerEatingQuadruple	{Default{PowerEating.Sound "items/food/pear";}}
+Class EatGenericSingle : PowerEating	{Default{Powerup.Duration 20;PowerEating.BiteSound "items/food/chew";PowerEating.SwallowSound "items/food/swallow";}}
+Class EatGeneric : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/chew";PowerEating.SwallowSound "items/food/swallow";}}
+Class EatApple : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/apple";PowerEating.SwallowSound "items/food/swallow";}}
+Class EatCarrot : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/carrot";PowerEating.SwallowSound "items/food/swallow";}}
+Class EatCelery : PowerEating	{Default{Powerup.Duration 50;PowerEating.BiteSound "items/food/celery";PowerEating.SwallowSound "items/food/swallow";}}
+Class EatPeach : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/peach";PowerEating.SwallowSound "items/food/swallow";}}
+Class EatPear : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/pear";PowerEating.SwallowSound "items/food/swallow";}}
