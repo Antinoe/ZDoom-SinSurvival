@@ -5,11 +5,7 @@ Class PowerEating : PowerRegeneration
 	string biteSound; property BiteSound : biteSound;
 	//	Every time you swallow.
 	string swallowSound; property SwallowSound : swallowSound;
-	Default
-	{
-		Powerup.Duration 80;
-		Powerup.Strength 0;
-	}
+	Default{Powerup.Duration 80;Powerup.Strength 0;}
 	Virtual void Bite(){
 		owner.GiveBody(random(sinfood_bitehealmin,sinfood_bitehealmax),9999);
 		owner.A_StartSound(biteSound,CHAN_AUTO,CHANF_OVERLAP);
@@ -39,25 +35,19 @@ Class PowerDrinking : PowerRegeneration
 	string capSound; property CapSound : capSound;
 	//	Every time you swallow.
 	string swallowSound; property SwallowSound : swallowSound;
-	Default
-	{
-		Powerup.Duration 80;
-		Powerup.Strength 0;
-	}
-	Virtual void Cap(){
-		owner.A_StartSound(capSound,CHAN_AUTO,CHANF_OVERLAP);
-	}
+	Default{Powerup.Duration 80;Powerup.Strength 0;}
+	Virtual void Cap(){owner.A_StartSound(capSound,CHAN_AUTO,CHANF_OVERLAP);}
 	Virtual void Swallow(){
 		owner.GiveBody(random(sinfood_bitehealmin,sinfood_bitehealmax),9999);
 		owner.A_StartSound(swallowSound,CHAN_AUTO,CHANF_OVERLAP);
 	}
 	Override void DoEffect(){
-		If(EffectTics == 80){Cap();}
-		If(EffectTics == 60){Swallow();}
-		If(EffectTics == 40){Swallow();}
-		If(EffectTics == 20){Swallow();}
+		If(EffectTics == 100){Cap();}
+		If(EffectTics == 75){Swallow();}
+		If(EffectTics == 50){Swallow();}
+		If(EffectTics == 25){Swallow();}
 	}
 }
-Class DrinkGenericSingle : PowerDrinking	{Default{Powerup.Duration 20;PowerDrinking.SwallowSound "items/drinks/swallow6";}}
-Class DrinkGeneric : PowerDrinking	{Default{Powerup.Duration 60;PowerDrinking.SwallowSound "items/drinks/swallow6";}}
-Class DrinkGenericCork : PowerDrinking	{Default{Powerup.Duration 80;PowerDrinking.CapSound "items/drinks/cork";PowerDrinking.SwallowSound "items/drinks/swallow6";}}
+Class DrinkGenericSingle : PowerDrinking	{Default{Powerup.Duration 25;PowerDrinking.SwallowSound "items/drinks/swallow6";}}
+Class DrinkGeneric : PowerDrinking	{Default{Powerup.Duration 75;PowerDrinking.SwallowSound "items/drinks/swallow6";}}
+Class DrinkGenericCork : PowerDrinking	{Default{Powerup.Duration 100;PowerDrinking.CapSound "items/drinks/cork";PowerDrinking.SwallowSound "items/drinks/swallow6";}}
