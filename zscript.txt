@@ -1,4 +1,5 @@
 version "4.0"
 
 #include "zscript/sinfood.zs"
+#include "zscript/examples.zs"
 #include "zscript/soundsequences.zs"

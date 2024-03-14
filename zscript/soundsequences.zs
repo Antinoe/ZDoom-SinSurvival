@@ -25,7 +25,7 @@ Class EatGenericSingle : PowerEating	{Default{Powerup.Duration 20;PowerEating.Bi
 Class EatGeneric : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/chew";PowerEating.SwallowSound "items/food/swallow";}}
 Class EatApple : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/apple";PowerEating.SwallowSound "items/food/swallow";}}
 Class EatCarrot : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/carrot";PowerEating.SwallowSound "items/food/swallow";}}
-Class EatCelery : PowerEating	{Default{Powerup.Duration 50;PowerEating.BiteSound "items/food/celery";PowerEating.SwallowSound "items/food/swallow";}}
+Class EatCelery : PowerEating	{Default{Powerup.Duration 40;PowerEating.BiteSound "items/food/celery";PowerEating.SwallowSound "items/food/swallow";}}
 Class EatPeach : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/peach";PowerEating.SwallowSound "items/food/swallow";}}
 Class EatPear : PowerEating	{Default{Powerup.Duration 80;PowerEating.BiteSound "items/food/pear";PowerEating.SwallowSound "items/food/swallow";}}
 
