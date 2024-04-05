@@ -1,5 +1,7 @@
 version "4.0"
 
+#include "zscript/equipmentsystem.zs"
+#include "zscript/survivalmechanics.zs"
 #include "zscript/sinfood.zs"
-#include "zscript/examples.zs"
-#include "zscript/soundsequences.zs"
+#include "zscript/sinfoodexamples.zs"
+#include "zscript/sinfoodsoundsequences.zs"
