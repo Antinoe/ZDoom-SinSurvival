@@ -1,7 +1,2 @@
 
-//
-//	General
-//
-server bool survivallibrary_needs = false;
-server int sinfood_bitehealmin = 1;
-server int sinfood_bitehealmax = 1;
+server bool sinsurvival_medical_replacements = true;

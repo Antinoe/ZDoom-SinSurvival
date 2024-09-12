@@ -1,7 +1,5 @@
-version "4.0"
-
-#include "zscript/equipmentsystem.zs"
-#include "zscript/survivalmechanics.zs"
-#include "zscript/sinfood.zs"
-#include "zscript/sinfoodexamples.zs"
-#include "zscript/sinfoodsoundsequences.zs"
+version "4.10.0"
+#include "zscript/sinsurvival/inventory/injuries.zs"
+#include "zscript/sinsurvival/inventory/medical.zs"
+#include "zscript/sinsurvival/inventory/powerups.zs"
+#include "zscript/sinsurvival/systems/injury.zs"
