@@ -1,19 +1,22 @@
 # Sin Survival
 
-Sin Survival is a Dwelling Sin addon that aims to provide a survival framework for mods/mapsets to use in Doom. If configured, you will receive injuries that require specific treatment. Nutrients and Minerals will be important, not only to sustain your body, but also to strengthen it. There will be resources for you to gather, which will be used to craft equipment and provisions. Please keep in mind that this is in its Alpha stage, so there isn't much for now. Its current feature(s) can be found below.
+Sin Survival is a Dwelling Sin addon that aims to provide a resource framework for mods/mapsets to use in Doom. There isn't much for now, but this will eventually contain enough content to build survival games with. Its current feature(s) can be found below.
 
 ### Features
 - Barotrauma-inspired Injury System
 	- Whenever you're hurt, an injury pertaining to the Damage Type will be applied to you.
-	- Rather than universal healing items, Sin Survival features medical items to treat these injuries:
-		- Bandages stop bleeding.
-		- Burn Salves provide relief for burns.
+	- Rather than universal healing items, Sin Survival features medical supplies to treat these injuries:
+		- Bandages stop Bleeding.
+		- Burn Salves provide relief for Burns.
 		- Sutures stitch up Lacerations, Gunshot Wounds and Deep Tissue Injuries.
 		- Tweezers remove Foreign Bodies. (Bullets, Shrapnel, etc.)
+		- Gel Ice Packs provide relief for Blunt Force Trauma.
+	- Wearing Armor stops most lethal injuries. What would be a Gunshot Wound turns into Blunt Force Trauma, for instance.
+	- And remember: Time heals all wounds.
 ### Development Roadmap
 - Injury System [__PARTIALLY DONE__]
-- Needs System [__NOT THERE YET__]
+- Needs System (Hunger, Thirst, Sleep, etc.) [__NOT THERE YET__]
 - Provision Class (Developers will be able to create Food and Beverage items.) [__NOT THERE YET__]
-- Natural/unnatural resources to gather. [__NOT THERE YET__]
-- Cultivation System. [__NOT THERE YET__]
-- Animal Husbandry. [__NOT THERE YET__]
+- Natural/Unnatural resources to gather (From Plants, Trees and Rocks). [__NOT THERE YET__]
+- Crop Cultivation [__NOT THERE YET__]
+- Animals and Animal Husbandry [__NOT THERE YET__]
