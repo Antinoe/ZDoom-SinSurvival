@@ -40,6 +40,7 @@ Class SinSurvivalPotionGreen : SinPowerup{
 		Inventory.PickupMessage "$SINITEM_POTIONGPKUP";
 		Tag "$SINITEM_POTIONG";
 		SinItem.Description "$SINITEM_POTIONGDESC";
+		SinItem.RandomType RAND_ITEM;
 		SinItem.Stackable 1;
 		SinItem.SpawnSaveDrives 0;
 		SinPowerup.PowerupType "SinSurvivalPowerOpium";
@@ -55,6 +56,7 @@ Class SinSurvivalPotionRed : SinPowerup{
 		Inventory.PickupMessage "$SINITEM_POTIONGPKUP";
 		Tag "$SINITEM_POTIONR";
 		SinItem.Description "$SINITEM_POTIONGDESC";
+		SinItem.RandomType RAND_ITEM;
 		SinItem.Stackable 1;
 		SinItem.SpawnSaveDrives 0;
 		SinPowerup.PowerupType "SinSurvivalPowerAdrenaline";
@@ -71,6 +73,7 @@ Class SinSurvivalPotionBlue : SinHealing{
 		Tag "Blue Potion";
 		Health 5;
 		SinItem.Description "$SINITEM_POTIONGDESC";
+		SinItem.RandomType RAND_ITEM;
 		SinItem.Stackable 1;
 	}
 	States{Spawn: POT3 A -1; Stop;}
@@ -97,6 +100,7 @@ Class SinSurvivalPotionYellow : SinPowerup{
 		Inventory.PickupMessage "$SINITEM_POTIONGPKUP";
 		Tag "Yellow Potion";
 		SinItem.Description "$SINITEM_POTIONGDESC";
+		SinItem.RandomType RAND_ITEM;
 		SinItem.Stackable 1;
 		SinItem.SpawnSaveDrives 0;
 		SinPowerup.PowerupType "SinSurvivalPowerSteroids";
