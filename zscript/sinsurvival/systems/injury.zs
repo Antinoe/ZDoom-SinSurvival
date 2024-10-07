@@ -1,5 +1,6 @@
 
 //	Thank you for the Player pointer, TonynUBares and Fishytza!
+//	And a special thanks to Jacket for the AI-written Code. It was entertaining.
 Class SinSurvivalInjury : EventHandler{
 	Override void WorldThingDamaged(WorldEvent e){
 		if(e.thing && e.thing.player && e.thing.health > 0){

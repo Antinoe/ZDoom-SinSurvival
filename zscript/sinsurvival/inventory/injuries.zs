@@ -8,14 +8,15 @@ Class TEST : Powerup{
 		Powerup.Duration -9999;
 	}
 	Override bool HandlePickup(Inventory item){
-		if(item.GetClass() == self.GetClass()){self.amount += item.amount;}
-		return super.HandlePickup(item);
+		If(item.GetClass() == self.GetClass()){self.amount += item.amount;}
+		return Super.HandlePickup(item);
 	}
 }
 */
 
-Class Injury : Powerup{
+Class Injury : Powerup abstract{
 	int timer;
+	int timerTicks; property TimerTicks : timerTicks;
 	Default{
 		Inventory.Icon "";
 		Inventory.Amount 1;
@@ -23,31 +24,32 @@ Class Injury : Powerup{
 		+INVENTORY.UNDROPPABLE;
 		+INVENTORY.UNTOSSABLE;
 		Powerup.Duration 0x7FFFFFFF;
+		Injury.TimerTicks 350;
 	}
 	Override bool HandlePickup(Inventory item){
-		if(item.GetClass() == self.GetClass()){self.amount += item.amount;}
-		return super.HandlePickup(item);
+		If(item.GetClass() == self.GetClass()){self.amount += item.amount;}
+		Return Super.HandlePickup(item);
 	}
 	Override void AttachToOwner(Actor other){
-		timer = 350;
-		super.AttachToOwner(other);
+		timer = timerTicks;
+		Super.AttachToOwner(other);
 	}
 	Override void Tick(){
 		timer--;
-		if(timer <= 0){
-			timer = 350;
-			InjuryTimerTick();
+		If(timer <= 0){
+			timer = timerTicks;
+			InjuryTick();
 		}
-		super.Tick();
+		Super.Tick();
 	}
-	Virtual void InjuryTimerTick(){}
+	Virtual void InjuryTick(){}
 	Override void DetachFromOwner(){
 		timer = 0;
-		super.DetachFromOwner();
+		Super.DetachFromOwner();
 	}
 	/*
-	Override bool TryPickup(in out Actor toucher){return super.TryPickup(toucher);}
-	Override bool HandlePickup(Inventory item){return super.HandlePickup(item);}
+	Override bool TryPickup(in out Actor toucher){return Super.TryPickup(toucher);}
+	Override bool HandlePickup(Inventory item){return Super.HandlePickup(item);}
 	Override void AttachToOwner(Actor other){}
 	Override void Tick(){}
 	Override void DetachFromOwner(){}
@@ -58,53 +60,57 @@ Class Injury : Powerup{
 }
 
 Class InjuryBluntForceTrauma : Injury{
-	Default{Inventory.Icon "SMITA0";}
-	Override void InjuryTimerTick(){
+	Default{Inventory.Icon "SMITA0"; Injury.TimerTicks 350;}
+	Override void InjuryTick(){
 		owner.GiveBody(1);
 		owner.TakeInventory("InjuryBluntForceTrauma",1);
-		super.InjuryTimerTick();
 	}
 }
 Class InjuryLaceration : Injury{
-	Default{Inventory.Icon "CSAWA0";}
-	Override void InjuryTimerTick(){
+	Default{Inventory.Icon "CSAWA0"; Injury.TimerTicks 350;}
+	Override void InjuryTick(){
 		owner.GiveBody(1);
 		owner.TakeInventory("InjuryLaceration",1);
-		super.InjuryTimerTick();
 	}
 }
 Class InjuryBleeding : Injury{
-	Default{Inventory.Icon "BLUDA0";}
-	Override void InjuryTimerTick(){
-		if(owner.health == 1){owner.A_DamageSelf(1);}
-		else{owner.A_SetHealth(owner.health -= 1);}
+	Default{Inventory.Icon "BLUDA0"; Injury.TimerTicks 350;}
+	Override void InjuryTick(){
+		If(owner.health == 1){owner.A_DamageSelf(1);}
+		Else{owner.A_SetHealth(owner.health -= 1);}
+		//owner.A_DamageSelf(1);
+		owner.GiveInventory("InjurySepsis",1);
 		owner.TakeInventory("InjuryBleeding",1);
-		//super.InjuryTimerTick();
+	}
+}
+Class InjurySepsis : Injury{
+	Default{Inventory.Icon "BLUDC0"; Injury.TimerTicks 350;}
+	Override void InjuryTick(){
+		If(owner.health == 1){owner.A_DamageSelf(1);}
+		Else{owner.A_SetHealth(owner.health -= 1);}
+		//owner.A_DamageSelf(1);
+		owner.GiveInventory("InjurySepsis",1);
 	}
 }
 Class InjuryBurn : Injury{
-	Default{Inventory.Icon "FIREA0";}
-	Override void InjuryTimerTick(){
-		owner.GiveBody(1);
+	Default{Inventory.Icon "FIREA0"; Injury.TimerTicks 350;}
+	Override void InjuryTick(){
+		owner.GiveInventory("InjurySepsis",1);
 		owner.TakeInventory("InjuryBurn",1);
-		super.InjuryTimerTick();
-	}
-}
-Class InjuryDeepTissueInjury : Injury{
-	Default{Inventory.Icon "FBXPA0";}
-	Override void InjuryTimerTick(){
-		owner.GiveBody(1);
-		owner.TakeInventory("InjuryDeepTissueInjury",1);
-		super.InjuryTimerTick();
 	}
 }
 Class InjuryGunshotWound : Injury{
-	Default{Inventory.Icon "BLUDC0";}
-	Override void InjuryTimerTick(){
+	Default{Inventory.Icon "BLUDC0"; Injury.TimerTicks 350;}
+	Override void InjuryTick(){
 		owner.GiveBody(1);
 		owner.TakeInventory("InjuryGunshotWound",1);
-		super.InjuryTimerTick();
 	}
 }
-Class InjuryForeignBody : Injury{Default{Inventory.Icon "ROCKA0";}}
-Class InjurySepsis : Injury{Default{Inventory.Icon "BAL7Z0";}}
+Class InjuryDeepTissueInjury : Injury{
+	Default{Inventory.Icon "FBXPA0"; Injury.TimerTicks 350;}
+	Override void InjuryTick(){
+		owner.GiveBody(1);
+		owner.TakeInventory("InjuryDeepTissueInjury",1);
+	}
+}
+Class InjuryForeignBody : Injury{Default{Inventory.Icon "ROCKA0"; Injury.TimerTicks 350;}}

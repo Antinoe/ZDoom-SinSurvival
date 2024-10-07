@@ -1,4 +1,5 @@
 version "4.10.0"
+#include "zscript/sinsurvival/inventory/healing.zs"
 #include "zscript/sinsurvival/inventory/injuries.zs"
 #include "zscript/sinsurvival/inventory/medical.zs"
 #include "zscript/sinsurvival/inventory/powerups.zs"
