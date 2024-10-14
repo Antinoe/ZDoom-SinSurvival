@@ -76,20 +76,20 @@ Class InjuryLaceration : Injury{
 Class InjuryBleeding : Injury{
 	Default{Inventory.Icon "BLUDA0"; Injury.TimerTicks 350;}
 	Override void InjuryTick(){
+		owner.GiveInventory("InjurySepsis",1);
+		owner.TakeInventory("InjuryBleeding",1);
 		If(owner.health == 1){owner.A_DamageSelf(1);}
 		Else{owner.A_SetHealth(owner.health -= 1);}
 		//owner.A_DamageSelf(1);
-		owner.GiveInventory("InjurySepsis",1);
-		owner.TakeInventory("InjuryBleeding",1);
 	}
 }
 Class InjurySepsis : Injury{
 	Default{Inventory.Icon "BLUDC0"; Injury.TimerTicks 350;}
 	Override void InjuryTick(){
+		owner.GiveInventory("InjurySepsis",1);
 		If(owner.health == 1){owner.A_DamageSelf(1);}
 		Else{owner.A_SetHealth(owner.health -= 1);}
 		//owner.A_DamageSelf(1);
-		owner.GiveInventory("InjurySepsis",1);
 	}
 }
 Class InjuryBurn : Injury{
