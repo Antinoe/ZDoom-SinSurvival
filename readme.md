@@ -8,6 +8,7 @@ Sin Survival is a Dwelling Sin addon that aims to provide a resource framework f
 	- Rather than universal healing items, Sin Survival features medical supplies to treat these injuries:
 		- Bandages stop Bleeding and speed up the healing of Lacerations.
 		- Antibiotic Glue provides relief for Burns and kills bacteria, treating Sepsis.
+		- Saline treats Blood Loss, granting the body fluid balance.
 		- Sutures stitch up Lacerations, Gunshot Wounds and Deep Tissue Injuries.
 		- Tweezers remove Foreign Bodies. (Bullets, Shrapnel, etc.)
 		- Gel Ice Packs provide relief for Blunt Force Trauma.

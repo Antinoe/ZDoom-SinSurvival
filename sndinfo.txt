@@ -1,0 +1,5 @@
+
+$random SinSurvival/Bandage {SinSurvival/Bandage1 SinSurvival/Bandage2}
+SinSurvival/Bandage1 "sounds/Bandage1.ogg"
+SinSurvival/Bandage2 "sounds/Bandage2.ogg"
+SinSurvival/Syringe "sounds/Syringe.ogg"
