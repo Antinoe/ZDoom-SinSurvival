@@ -47,9 +47,9 @@ Class SinSurvivalMedical : EventHandler{
 		}
 	}
 	Override void CheckReplacement(ReplaceEvent e){
-		if(e.Replacee is "SinPotionGreen"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="Bandage";}
-		if(e.Replacee is "SinPotionRed"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="Suture";}
-		if(e.Replacee is "SinStimpack"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="Ointment";}
-		if(e.Replacee is "SinMedikit"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="Saline";}
+		if(e.Replacee is "SinPotionGreen"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="SinBandage";}
+		if(e.Replacee is "SinPotionRed"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="SinSuture";}
+		if(e.Replacee is "SinStimpack"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="SinOintment";}
+		if(e.Replacee is "SinMedikit"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="SinSaline";}
 	}
 }

@@ -21,10 +21,6 @@ Class Bleeding : Affliction{
 		Inventory.MaxAmount 9999;
 		Powerup.Duration 350;
 	}
-	Override bool HandlePickup(Inventory item){
-		If(item.GetClass() == self.GetClass()){self.amount += item.amount;}
-		Return Super.HandlePickup(item);
-	}
 	Override void DoEffect(){
 		if(self.effectTics == 1){
 			effectTics = 350;
@@ -49,3 +45,19 @@ Class GunshotWound : Affliction{Default{Inventory.Icon "AFGWA0";}}
 Class Infection : Affliction{Default{Inventory.Icon "AFINA0";}}
 Class Laceration : Affliction{Default{Inventory.Icon "AFLCA0";}}
 Class InternalDamage : Affliction{Default{Inventory.Icon "AFIDA0";}}
+Class Stitches : Affliction{
+	Default{
+		Inventory.Icon "AFSTA0";
+		Inventory.Amount 1;
+		Inventory.MaxAmount 9999;
+		Powerup.Duration 175;
+	}
+	Override void DoEffect(){
+		if(self.effectTics == 1){
+			effectTics = 175;
+			owner.A_SetBlend("White",1,20);
+			owner.GiveBody(1);
+			owner.TakeInventory("Stitches",1);
+		}
+	}
+}

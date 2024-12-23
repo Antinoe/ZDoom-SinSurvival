@@ -1,11 +1,12 @@
 
-Class Bandage : SinPowerup{
+Class SinBandage : SinPowerup{
 	Default{
 		Scale 1.0;
 		Tag "Bandage";
 		Inventory.Icon "BNDGA0";
 		Inventory.Amount 2;
 		Inventory.MaxAmount 10;
+		SinItem.Description "A versatile medical dressing designed to stop \c[green]bleeding\c[grey]. It promotes the healing of \c[green]blunt trauma\c[grey], \c[green]burns\c[grey], and \c[green]wounds\c[grey] by protecting the affected area and providing a stable environment for recovery.";
 		SinItem.Stackable 1;
 		SinItem.SpawnSaveDrives 0;
 	}
@@ -54,13 +55,14 @@ Class PowerBandage : Powerup{
 		}
 	}
 }
-Class Ointment : SinPowerup{
+Class SinOintment : SinPowerup{
 	Default{
 		Scale 0.75;
 		Tag "Burn Ointment";
 		Inventory.Icon "OINTA0";
 		Inventory.Amount 4;
 		Inventory.MaxAmount 10;
+		SinItem.Description "A soothing topical treatment formulated to relieve pain and reduce inflammation caused by \c[green]burns\c[grey]. It aids in healing by keeping the affected area moisturized and protected from \c[green]infection\c[grey], promoting faster skin recovery.";
 		SinItem.Stackable 1;
 		SinItem.SpawnSaveDrives 0;
 	}
@@ -98,13 +100,14 @@ Class PowerOintment : Powerup{
 		}
 	}
 }
-Class Saline : SinPowerup{
+Class SinSaline : SinPowerup{
 	Default{
 		Scale 0.75;
-		Tag "Saline";
+		Tag "Ringer's Solution";
 		Inventory.Icon "SALNA0";
 		Inventory.Amount 2;
 		Inventory.MaxAmount 10;
+		SinItem.Description "A sterile intravenous fluid containing salts and electrolytes, designed to mimic the composition of body fluids. It is used to restore hydration, maintain electrolyte balance, and support \c[green]circulation\c[grey] during medical treatments or emergencies.";
 		SinItem.Stackable 1;
 		SinItem.SpawnSaveDrives 0;
 	}
@@ -138,13 +141,14 @@ Class PowerSaline : Powerup{
 		}
 	}
 }
-Class Suture : SinPowerup{
+Class SinSuture : SinPowerup{
 	Default{
 		Scale 0.75;
 		Tag "Suture";
 		Inventory.Icon "BNDGA0";
 		Inventory.Amount 4;
 		Inventory.MaxAmount 20;
+		SinItem.Description "Medical threads used to stitch and close \c[green]wounds\c[grey], aiding in proper \c[green]healing\c[grey] and reducing the risk of \c[green]infection\c[grey]. They are essential for repairing \c[green]deep cuts\c[grey] or \c[blue]surgical incisions\c[grey], ensuring the skin or tissue remains aligned during recovery.";
 		SinItem.Stackable 1;
 		SinItem.SpawnSaveDrives 0;
 	}
@@ -156,11 +160,11 @@ Class Suture : SinPowerup{
 			let hasDeepTissueInjury = owner.FindInventory("DeepTissueInjury");
 			let hasGunshotWound = owner.FindInventory("GunshotWound");
 			let hasLaceration = owner.FindInventory("Laceration");
-			if(hasBiteWound){owner.GiveBody(10); owner.TakeInventory("BiteWound",10);}
-			if(hasBleeding){owner.TakeInventory("Bleeding",10);}
-			if(hasDeepTissueInjury){owner.GiveBody(10); owner.TakeInventory("DeepTissueInjury",10);}
-			if(hasGunshotWound){owner.GiveBody(10); owner.TakeInventory("GunshotWound",10);}
-			if(hasLaceration){owner.GiveBody(10); owner.TakeInventory("Laceration",10);}
+			if(hasBiteWound){owner.GiveBody(5); owner.TakeInventory("BiteWound",5); owner.GiveInventory("Stitches",5);}
+			if(hasBleeding){owner.TakeInventory("Bleeding",5);}
+			if(hasDeepTissueInjury){owner.GiveBody(5); owner.TakeInventory("DeepTissueInjury",5); owner.GiveInventory("Stitches",5);}
+			if(hasGunshotWound){owner.GiveBody(5); owner.TakeInventory("GunshotWound",5); owner.GiveInventory("Stitches",5);}
+			if(hasLaceration){owner.GiveBody(5); owner.TakeInventory("Laceration",5); owner.GiveInventory("Stitches",5);}
 			owner.A_StartSound("SinSurvival/Syringe",CHAN_AUTO,CHANF_OVERLAP);
 			owner.A_SetBlend("White",1,20);
 		}

@@ -1,4 +1,7 @@
 version "4.10.0"
 #include "zscript/sinsurvival/afflictions.zs"
+#include "zscript/sinsurvival/items/fabricators.zs"
+#include "zscript/sinsurvival/items/materials.zs"
 #include "zscript/sinsurvival/items/medicine.zs"
+#include "zscript/sinsurvival/items/tools.zs"
 #include "zscript/sinsurvival/scripts/medical.zs"
