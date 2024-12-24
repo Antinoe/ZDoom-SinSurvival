@@ -14,17 +14,22 @@ Class SinBundle : SinConsumable{
 		SinItem.Description "A versatile bag for carrying supplies.";
 		SinItem.Stackable 0;
 	}
-	States{Spawn: BUND A -1; Stop; BUND A 0; BUND B 0;}
+	States{Spawn: BUND A -1; Stop; BUND A 0; BUND B 0; BUND C 0; BUND D 0; BUND E 0; BUND F 0;}
 	Override void HandleSprite(int status){
+		int percentFull = int(100 * self.amount / self.maxamount);
 		string ico = "BUND";
-		If(self.amount == 0){ico = ico.."A0";}
-		Else{ico = ico.."B0";}
+		If(percentFull == 0){ico = ico.."A0";}
+		Else If(percentFull >= 1 && percentFull < 25){ico = ico.."B0";}
+		Else If(percentFull >= 25 && percentFull < 50){ico = ico.."C0";}
+		Else If(percentFull >= 50 && percentFull < 75){ico = ico.."D0";}
+		Else If(percentFull >= 75 && percentFull < 100){ico = ico.."E0";}
+		Else If(percentFull == 100){ico = ico.."F0";}
 		icon = TexMan.CheckForTexture(ico,TexMan.Type_Any);
 	}
 	Override bool Combine(SinItem other, SinInvManager invman){
 		owner.A_StartSound("Bundle/Insert", CHAN_AUTO, CHANF_OVERLAP);
 		//	TODO: "other.stack == 0" will need to be added to Bundles that have a Capacity unequal to 100.
-		If(other is "SinAmmoBox" || other is "SinArmor" || other.amount <= 0) {Return 0;}
+		If(other is "SinAmmoBox" || other is "SinArmor" || other is "SinBundle" || other.amount <= 0) {Return 0;}
 		int stackUnits = (other.stack == 0) ? 100 : (100 / other.MaxAmount); // Unstackable items = 100 units.
 		int spaceLeft = self.maxamount - self.amount; // Capacity left.
 		int maxInsertable = spaceLeft / stackUnits; // Items that fit.
@@ -128,9 +133,18 @@ Class SinBundle : SinConsumable{
 }
 Class SinPouch : SinBundle{
 	Default{
-		Scale 1;
+		Scale 1.25;
 		Tag "Pouch";
+		Inventory.Icon "BUNDB0";
 		Inventory.MaxAmount 50;
+	}
+	Override void HandleSprite(int status){
+		int percentFull = int(100 * self.amount / self.maxamount);
+		string ico = "BUND";
+		If(percentFull >= 0 && percentFull < 25){ico = ico.."B0";}
+		Else If(percentFull >= 25 && percentFull < 50){ico = ico.."C0";}
+		Else If(percentFull >= 50){ico = ico.."D0";}
+		icon = TexMan.CheckForTexture(ico,TexMan.Type_Any);
 	}
 }
 Class SinSack : SinBundle{
@@ -138,6 +152,15 @@ Class SinSack : SinBundle{
 		Scale 1.5;
 		Tag "Sack";
 		Inventory.MaxAmount 200;
+	}
+	Override void HandleSprite(int status){
+		int percentFull = int(100 * self.amount / self.maxamount);
+		string ico = "BUND";
+		If(percentFull == 0){ico = ico.."A0";}
+		Else If(percentFull >= 1 && percentFull < 50){ico = ico.."D0";}
+		Else If(percentFull >= 50 && percentFull < 100){ico = ico.."E0";}
+		Else If(percentFull == 100){ico = ico.."F0";}
+		icon = TexMan.CheckForTexture(ico,TexMan.Type_Any);
 	}
 	// We no longer need this, as Unstackable Items work correctly now.
 	/*
