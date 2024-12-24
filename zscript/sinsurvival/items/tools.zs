@@ -25,7 +25,7 @@ Class SinBundle : SinConsumable{
 		owner.A_StartSound("Bundle/Insert", CHAN_AUTO, CHANF_OVERLAP);
 		//	TODO: "other.stack == 0" will need to be added to Bundles that have a Capacity unequal to 100.
 		If(other is "SinAmmoBox" || other is "SinArmor" || other.amount <= 0) {Return 0;}
-		int stackUnits = (other.stack == 0) ? 100 : (self.MaxAmount / other.MaxAmount); // Unstackable items = 100 units.
+		int stackUnits = (other.stack == 0) ? 100 : (100 / other.MaxAmount); // Unstackable items = 100 units.
 		int spaceLeft = self.maxamount - self.amount; // Capacity left.
 		int maxInsertable = spaceLeft / stackUnits; // Items that fit.
 		int insertAmount = Min(other.amount, maxInsertable); // Items to insert.
@@ -48,13 +48,47 @@ Class SinBundle : SinConsumable{
 		//owner.A_Log("Not enough space in the Bundle!");
 		Return 0;
 	}
-	//	TODO: I'll need to re-write this function so Bundles with a Capacity unequal to 100 work.
+	Override bool Use(bool pickup){
+		owner.A_StartSound("Bundle/Dump", CHAN_AUTO, CHANF_OVERLAP);
+		If(storedItems.Size() > 0){
+			string itemToSpawn = storedItems[0];
+			int totalAmount = storedAmounts[0];
+			// We temporarily get the item's Max Stack here.
+			let temp = SinItem(owner.Spawn(itemToSpawn));
+			int maxStack = temp.MaxAmount;
+			temp.Destroy();
+			// This checks the amount to spawn based on the item's Max Stack.
+			int amountToSpawn = Min(totalAmount, maxStack);
+			let invman = SinInvManager(owner.FindInventory("SinInvManager"));
+			let item = SinItem(owner.Spawn(itemToSpawn, owner.pos));
+			If(item){
+				item.AttachToOwner(owner);
+				item.Amount = amountToSpawn;
+				item.SinfulPickup(invman);
+				// This updates the storage.
+				storedAmounts[0] -= amountToSpawn;
+				int stackUnits = (100 / maxStack);
+				self.amount -= (amountToSpawn * stackUnits);
+				// And this removes the item from the Bundle if emptied completely.
+				If(storedAmounts[0] <= 0){
+					storedItems.Delete(0);
+					storedAmounts.Delete(0);
+				}
+			HandleSprite();
+			UpdateDescription();
+			Return 1;
+			}
+		}
+		Return 0;
+	}
+	// Old Use() function. I'll keep it for reference.
+	/*
 	Override bool Use(bool pickup){
 		owner.A_StartSound("Bundle/Dump", CHAN_AUTO, CHANF_OVERLAP);
 		If(storedItems.Size() > 0){
 			string itemToSpawn = storedItems[0];
 			int amountToSpawn = storedAmounts[0];
-			int stackUnits = (self.maxamount / SinItem(owner.Spawn(itemToSpawn)).MaxAmount);
+			int stackUnits = (100 / SinItem(owner.Spawn(itemToSpawn)).MaxAmount);
 			let invman = SinInvManager(owner.FindInventory("SinInvManager"));
 			let item = SinItem(owner.Spawn(itemToSpawn, owner.pos));
 			If(item){
@@ -71,11 +105,13 @@ Class SinBundle : SinConsumable{
 		}
 		Return 0;
 	}
+	*/
 	//	Maybe these don't need to be virtualized..
 	Virtual void PrintStoredItems(){
 		owner.A_Log("Items in Bundle:");
 		for(int i = 0; i < storedItems.Size(); i++){owner.A_Log(storedItems[i] .. " x" .. storedAmounts[i]);}
 	}
+	//	Might remove this..
 	Virtual void UpdateDescription(){
 		/*
 		string desc = "";
@@ -89,6 +125,28 @@ Class SinBundle : SinConsumable{
 		self.desc = desc;
 		*/
 	}
+}
+Class SinPouch : SinBundle{
+	Default{
+		Scale 1;
+		Tag "Pouch";
+		Inventory.MaxAmount 50;
+	}
+}
+Class SinSack : SinBundle{
+	Default{
+		Scale 1.5;
+		Tag "Sack";
+		Inventory.MaxAmount 200;
+	}
+	// We no longer need this, as Unstackable Items work correctly now.
+	/*
+	Override bool Combine(SinItem other, SinInvManager invman){
+		owner.A_StartSound("Bundle/Insert", CHAN_AUTO, CHANF_OVERLAP);
+		If(other.stack == 0) {Return 0;}
+		Return Super.Combine(other,invman);
+	}
+	*/
 }
 Class SinSurvivalBackpack : SinBackpack replaces SinBackpack{
 	Override bool TryPickup(in out Actor toucher){
