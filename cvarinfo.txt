@@ -1,2 +1,3 @@
 
-server bool sinsurvival_medical_replacements = true;
+server bool sinsurvival_hotkeys = true;
+server bool sinsurvival_injury = true;
