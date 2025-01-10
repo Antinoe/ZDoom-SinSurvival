@@ -31,7 +31,7 @@ Class Bleeding : Affliction{
 			If(owner.health > 1){
 				owner.A_SetHealth(owner.health -= 1);
 				owner.GiveInventory("BloodLoss",1);
-				owner.TakeInventory("Bleeding",1);
+				owner.TakeInventory(self.GetClass(),1);
 			}
 		}
 	}
@@ -45,19 +45,20 @@ Class GunshotWound : Affliction{Default{Inventory.Icon "AFGWA0";}}
 Class Infection : Affliction{Default{Inventory.Icon "AFINA0";}}
 Class Laceration : Affliction{Default{Inventory.Icon "AFLCA0";}}
 Class InternalDamage : Affliction{Default{Inventory.Icon "AFIDA0";}}
+Class OrganDamage : Affliction{Default{Inventory.Icon "AFODA0";}}
 Class Stitches : Affliction{
 	Default{
 		Inventory.Icon "AFSTA0";
 		Inventory.Amount 1;
-		Inventory.MaxAmount 9999;
+		Inventory.MaxAmount 50;
 		Powerup.Duration 175;
 	}
 	Override void DoEffect(){
 		if(self.effectTics == 1){
 			effectTics = 175;
-			owner.A_SetBlend("White",1,20);
+			//owner.A_SetBlend("White",1,20);
 			owner.GiveBody(1);
-			owner.TakeInventory("Stitches",1);
+			owner.TakeInventory(self.GetClass(),1);
 		}
 	}
 }

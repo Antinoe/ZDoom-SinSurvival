@@ -1,173 +1,133 @@
 
-Class SinBandage : SinPowerup{
+//	Base Healing Class
+Class SinPowerHealing : Powerup abstract{
+	enum SinRemedy{
+		NONE = 0, //No remedy.
+		ALL = 1, //Heals everything.
+		BANDAGE = 2, //Heals everything except for Burns, Blood Loss, Infection and Internal/Organ Damage.
+		ANTISEPTIC = 3, //Heals Infection.
+		OINTMENT = 4, //Heals Burns and Infection.
+		FLUID = 5, //Heals Blood Loss.
+		VITAMIN = 6 //Heals Internal Damage and Organ Damage.
+	}
+	int remedy; property Remedy : remedy; //Type of injuries to heal, refer to SinRemedy.
+	int effectTicsMax;
 	Default{
-		Scale 1.0;
-		Tag "Bandage";
-		Inventory.Icon "BNDGA0";
-		Inventory.Amount 2;
-		Inventory.MaxAmount 10;
-		SinItem.Description "A versatile medical dressing designed to stop \c[green]bleeding\c[grey]. It promotes the healing of \c[green]blunt trauma\c[grey], \c[green]burns\c[grey], and \c[green]wounds\c[grey] by protecting the affected area and providing a stable environment for recovery.";
-		SinItem.Stackable 1;
-		SinItem.SpawnSaveDrives 0;
-	}
-	States{Spawn: BNDG A -1; Stop;}
-	Override bool Use(bool pickup){
-		If(owner){
-			owner.TakeInventory("Bleeding",10);
-			owner.GiveInventory("PowerBandage",10);
-			owner.A_StartSound("SinSurvival/Bandage",CHAN_AUTO,CHANF_OVERLAP);
-		}
-		Return Super.Use(pickup);
-	}
-}
-Class PowerBandage : Powerup{
-	Default{
-		Inventory.Icon "BNDGA0";
-		Inventory.Amount 1;
-		Inventory.MaxAmount 50;
-		Powerup.Duration 350;
-	}
-	Override bool HandlePickup(Inventory item){
-		If(item.GetClass() == self.GetClass()){self.amount += item.amount;}
-		Return Super.HandlePickup(item);
-	}
-	Override void DoEffect(){
-		if(self.effectTics == 1){
-			let hasBiteWound = owner.FindInventory("BiteWound");
-			let hasBurn = owner.FindInventory("Burn");
-			let hasChemicalBurn = owner.FindInventory("ChemicalBurn");
-			let hasBleeding = owner.FindInventory("Bleeding");
-			let hasBluntTrauma = owner.FindInventory("BluntTrauma");
-			let hasDeepTissueInjury = owner.FindInventory("DeepTissueInjury");
-			let hasGunshotWound = owner.FindInventory("GunshotWound");
-			let hasLaceration = owner.FindInventory("Laceration");
-			if(hasBiteWound){owner.GiveBody(1); owner.TakeInventory("BiteWound",1);}
-			if(hasBurn){owner.GiveBody(1); owner.TakeInventory("Burn",1);}
-			if(hasChemicalBurn){owner.GiveBody(1); owner.TakeInventory("ChemicalBurn",1);}
-			if(hasBleeding){owner.TakeInventory("Bleeding",1);}
-			if(hasBluntTrauma){owner.GiveBody(1); owner.TakeInventory("BluntTrauma",1);}
-			if(hasDeepTissueInjury){owner.GiveBody(1); owner.TakeInventory("DeepTissueInjury",1);}
-			if(hasGunshotWound){owner.GiveBody(1); owner.TakeInventory("GunshotWound",1);}
-			if(hasLaceration){owner.GiveBody(1); owner.TakeInventory("Laceration",1);}
-			owner.A_SetBlend("White",1,20);
-			effectTics = 350;
-			owner.TakeInventory("PowerBandage",1);
-		}
-	}
-}
-Class SinOintment : SinPowerup{
-	Default{
-		Scale 0.75;
-		Tag "Burn Ointment";
-		Inventory.Icon "OINTA0";
-		Inventory.Amount 4;
-		Inventory.MaxAmount 10;
-		SinItem.Description "A soothing topical treatment formulated to relieve pain and reduce inflammation caused by \c[green]burns\c[grey]. It aids in healing by keeping the affected area moisturized and protected from \c[green]infection\c[grey], promoting faster skin recovery.";
-		SinItem.Stackable 1;
-		SinItem.SpawnSaveDrives 0;
-	}
-	States{Spawn: OINT A -1; Stop;}
-	Override bool Use(bool pickup){
-		If(owner){
-			owner.GiveInventory("PowerOintment",10);
-			owner.A_StartSound("SinSurvival/Syringe",CHAN_AUTO,CHANF_OVERLAP);
-		}
-		Return Super.Use(pickup);
-	}
-}
-Class PowerOintment : Powerup{
-	Default{
-		Inventory.Icon "OINTA0";
 		Inventory.Amount 1;
 		Inventory.MaxAmount 50;
 		Powerup.Duration 175;
+		SinPowerHealing.Remedy NONE;
+	}
+	Override void PostBeginPlay(){
+		effectTicsMax = effectTics;
 	}
 	Override bool HandlePickup(Inventory item){
 		If(item.GetClass() == self.GetClass()){self.amount += item.amount;}
 		Return Super.HandlePickup(item);
 	}
 	Override void DoEffect(){
-		if(self.effectTics == 1){
-			let hasBurn = owner.FindInventory("Burn");
-			let hasChemicalBurn = owner.FindInventory("ChemicalBurn");
-			let hasInfection = owner.FindInventory("Infection");
-			if(hasBurn){owner.GiveBody(1); owner.TakeInventory("Burn",1);}
-			if(hasChemicalBurn){owner.GiveBody(1); owner.TakeInventory("ChemicalBurn",1);}
-			if(hasInfection){owner.GiveBody(1); owner.TakeInventory("Infection",1);}
-			owner.A_SetBlend("White",1,20);
-			effectTics = 175;
-			owner.TakeInventory("PowerOintment",1);
+		If(owner && self.effectTics == 1){
+			effectTics = effectTicsMax;
+			Heal();
 		}
 	}
-}
-Class SinSaline : SinPowerup{
-	Default{
-		Scale 0.75;
-		Tag "Ringer's Solution";
-		Inventory.Icon "SALNA0";
-		Inventory.Amount 2;
-		Inventory.MaxAmount 10;
-		SinItem.Description "A sterile intravenous fluid containing salts and electrolytes, designed to mimic the composition of body fluids. It is used to restore hydration, maintain electrolyte balance, and support \c[green]circulation\c[grey] during medical treatments or emergencies.";
-		SinItem.Stackable 1;
-		SinItem.SpawnSaveDrives 0;
+	//	This is made virtual so you can execute your own code when healing.
+	//	If you plan on having all this run, remember to add "Super.Heal();" to the end of your code.
+	Virtual void Heal(){
+		let hasBiteWound = owner.FindInventory("BiteWound");
+		let hasBurn = owner.FindInventory("Burn");
+		let hasChemicalBurn = owner.FindInventory("ChemicalBurn");
+		let hasBleeding = owner.FindInventory("Bleeding");
+		let hasBloodLoss = owner.FindInventory("BloodLoss");
+		let hasBluntTrauma = owner.FindInventory("BluntTrauma");
+		let hasDeepTissueInjury = owner.FindInventory("DeepTissueInjury");
+		let hasGunshotWound = owner.FindInventory("GunshotWound");
+		let hasInfection = owner.FindInventory("Infection");
+		let hasInternalDamage = owner.FindInventory("InternalDamage");
+		let hasOrganDamage = owner.FindInventory("OrganDamage");
+		let hasLaceration = owner.FindInventory("Laceration");
+		If(hasBiteWound&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("BiteWound",1);}
+		If(hasBurn&&(remedy==1||remedy==4)){owner.GiveBody(1); owner.TakeInventory("Burn",1);}
+		If(hasChemicalBurn&&(remedy==1||remedy==4)){owner.GiveBody(1); owner.TakeInventory("ChemicalBurn",1);}
+		If(hasBleeding&&(remedy==1||remedy==2)){owner.TakeInventory("Bleeding",1);}
+		If(hasBloodLoss&&(remedy==1||remedy==5)){owner.GiveBody(1); owner.TakeInventory("BloodLoss",1);}
+		If(hasBluntTrauma&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("BluntTrauma",1);}
+		If(hasDeepTissueInjury&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("DeepTissueInjury",1);}
+		If(hasGunshotWound&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("GunshotWound",1);}
+		If(hasInfection&&(remedy==1||remedy==3||remedy==4)){owner.GiveBody(1); owner.TakeInventory("Infection",1);}
+		If(hasInternalDamage&&(remedy==1||remedy==6)){owner.GiveBody(1); owner.TakeInventory("InternalDamage",1);}
+		If(hasOrganDamage&&(remedy==1||remedy==6)){owner.GiveBody(1); owner.TakeInventory("OrganDamage",1);}
+		If(hasLaceration&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("Laceration",1);}
+		//owner.A_SetBlend("White",1,20);
+		owner.TakeInventory(self.GetClass(),1);
 	}
-	States{Spawn: SALN A -1; Stop;}
+}
+
+//	Items
+Class SinSurvivalStimpack : SinStimpack replaces SinStimpack{
+	Default{Health 0;}
 	Override bool Use(bool pickup){
 		If(owner){
-			owner.GiveInventory("PowerSaline",10);
-			owner.A_StartSound("SinSurvival/Syringe",CHAN_AUTO,CHANF_OVERLAP);
+			let playe = SinPlayer(owner);
+			If(playe&&playe.health<playe.maxhealth){
+				owner.TakeInventory("Bleeding",10);
+				owner.GiveInventory("SinPowerStimpack",10);
+			}
 		}
 		Return Super.Use(pickup);
 	}
 }
-Class PowerSaline : Powerup{
+Class SinPowerStimpack : SinPowerHealing{
 	Default{
-		Inventory.Icon "SALNA0";
-		Inventory.Amount 1;
-		Inventory.MaxAmount 50;
-		Powerup.Duration 175;
-	}
-	Override bool HandlePickup(Inventory item){
-		If(item.GetClass() == self.GetClass()){self.amount += item.amount;}
-		Return Super.HandlePickup(item);
-	}
-	Override void DoEffect(){
-		if(self.effectTics == 1){
-			let hasBloodLoss = owner.FindInventory("BloodLoss");
-			if(hasBloodLoss){owner.GiveBody(1); owner.TakeInventory("BloodLoss",1);}
-			owner.A_SetBlend("White",1,20);
-			effectTics = 175;
-			owner.TakeInventory("PowerSaline",1);
-		}
+		Inventory.Icon "STIMA0";
+		SinPowerHealing.Remedy ALL;
 	}
 }
-Class SinSuture : SinPowerup{
-	Default{
-		Scale 0.75;
-		Tag "Suture";
-		Inventory.Icon "BNDGA0";
-		Inventory.Amount 4;
-		Inventory.MaxAmount 20;
-		SinItem.Description "Medical threads used to stitch and close \c[green]wounds\c[grey], aiding in proper \c[green]healing\c[grey] and reducing the risk of \c[green]infection\c[grey]. They are essential for repairing \c[green]deep cuts\c[grey] or \c[blue]surgical incisions\c[grey], ensuring the skin or tissue remains aligned during recovery.";
-		SinItem.Stackable 1;
-		SinItem.SpawnSaveDrives 0;
-	}
-	States{Spawn: BNDG A -1; Stop;}
+Class SinSurvivalMedikit : SinMedikit replaces SinMedikit{
+	Default{Health 0;}
 	Override bool Use(bool pickup){
 		If(owner){
-			let hasBiteWound = owner.FindInventory("BiteWound");
-			let hasBleeding = owner.FindInventory("Bleeding");
-			let hasDeepTissueInjury = owner.FindInventory("DeepTissueInjury");
-			let hasGunshotWound = owner.FindInventory("GunshotWound");
-			let hasLaceration = owner.FindInventory("Laceration");
-			if(hasBiteWound){owner.GiveBody(5); owner.TakeInventory("BiteWound",5); owner.GiveInventory("Stitches",5);}
-			if(hasBleeding){owner.TakeInventory("Bleeding",5);}
-			if(hasDeepTissueInjury){owner.GiveBody(5); owner.TakeInventory("DeepTissueInjury",5); owner.GiveInventory("Stitches",5);}
-			if(hasGunshotWound){owner.GiveBody(5); owner.TakeInventory("GunshotWound",5); owner.GiveInventory("Stitches",5);}
-			if(hasLaceration){owner.GiveBody(5); owner.TakeInventory("Laceration",5); owner.GiveInventory("Stitches",5);}
-			owner.A_StartSound("SinSurvival/Syringe",CHAN_AUTO,CHANF_OVERLAP);
-			owner.A_SetBlend("White",1,20);
+			let playe = SinPlayer(owner);
+			If(playe&&playe.health<playe.maxhealth){
+				owner.TakeInventory("Bleeding",25);
+				owner.GiveInventory("SinPowerMedikit",25);
+			}
 		}
 		Return Super.Use(pickup);
+	}
+}
+Class SinPowerMedikit : SinPowerHealing{
+	Default{
+		Inventory.Icon "MEDIA0";
+		SinPowerHealing.Remedy ALL;
+	}
+}
+Class SinSurvivalBerserk : SinBerserk replaces SinBerserk{
+	Override bool Use(bool pickup){
+		If(owner){
+			let playe = SinPlayer(owner);
+			If(playe&&playe.health<playe.maxhealth){
+				owner.TakeInventory("BiteWound",100);
+				owner.TakeInventory("Burn",100);
+				owner.TakeInventory("ChemicalBurn",100);
+				owner.TakeInventory("Bleeding",100);
+				owner.TakeInventory("BloodLoss",100);
+				owner.TakeInventory("BluntTrauma",100);
+				owner.TakeInventory("DeepTissueInjury",100);
+				owner.TakeInventory("GunshotWound",100);
+				owner.TakeInventory("Infection",100);
+				owner.TakeInventory("InternalDamage",100);
+				owner.TakeInventory("Laceration",100);
+				owner.GiveInventory("SinPowerBerserk",100);
+			}
+		}
+		Return Super.Use(pickup);
+	}
+}
+Class SinPowerBerserk : SinPowerHealing{
+	Default{
+		Inventory.Icon "PSTRA0";
+		Powerup.Duration 35;
+		SinPowerHealing.Remedy ALL;
 	}
 }

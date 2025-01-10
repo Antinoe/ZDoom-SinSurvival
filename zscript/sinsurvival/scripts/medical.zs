@@ -3,7 +3,7 @@
 //	And a special thanks to Jacket for the AI-written Code. It was entertaining.
 Class SinSurvivalMedical : EventHandler{
 	Override void WorldThingDamaged(WorldEvent e){
-		if(e.thing && e.thing.player && e.thing.health > 0){
+		If(e.thing && e.thing.player && e.thing.health > 0 && cvar.GetCVar("sinsurvival_injury").getbool()){
 			//e.thing.player.mo.A_Log("DAMAGED!",5);
 			bool isBiteWound = (e.DamageType == "Bite" || e.DamageType == "Jaw" || e.DamageType == "Teeth");
 			bool isBluntTrauma = (e.DamageType == "Blunt" || e.DamageType == "Impact" || e.DamageType == "Stomp" || e.DamageType == "Bat" || e.DamageType == "Club");
@@ -18,38 +18,32 @@ Class SinSurvivalMedical : EventHandler{
 			bool isDamageType = (isBiteWound || isBluntTrauma || isLaceration || isGunshotWound || isDeepTissueInjury || isBurn || isChemicalBurn || isInfection || isInternalDamage);
 			//let armor = BasicArmor(players[e.PlayerNumber].mo.FindInventory("BasicArmor"));
 			bool isWearingArmor = e.thing.player.mo.CountInv("BasicArmor") > 0;
-			if(!isDamageType || isWearingArmor && !isBurn){e.thing.player.mo.GiveInventory("BluntTrauma",e.Damage);}
-			if(isBluntTrauma){e.thing.player.mo.GiveInventory("BluntTrauma",e.Damage);}
+			If(!isDamageType || isWearingArmor && !isBurn){e.thing.player.mo.GiveInventory("BluntTrauma",e.Damage);}
+			If(isBluntTrauma){e.thing.player.mo.GiveInventory("BluntTrauma",e.Damage);}
 			int bleedingAmount = (e.Damage / 4);
-			if(isBiteWound && !isWearingArmor){
+			If(isBiteWound && !isWearingArmor){
 				e.thing.player.mo.GiveInventory("BiteWound",e.Damage);
 				e.thing.player.mo.GiveInventory("Bleeding",bleedingAmount);
 			}
-			if(isLaceration && !isWearingArmor){
+			If(isLaceration && !isWearingArmor){
 				e.thing.player.mo.GiveInventory("Laceration",e.Damage);
 				e.thing.player.mo.GiveInventory("Bleeding",bleedingAmount);
 			}
-			if(isGunshotWound && !isWearingArmor){
+			If(isGunshotWound && !isWearingArmor){
 				e.thing.player.mo.GiveInventory("GunshotWound",e.Damage);
 				e.thing.player.mo.GiveInventory("Bleeding",bleedingAmount);
 				//e.thing.player.mo.GiveInventory("ForeignBody",1);
 			}
 			int shrapnelAmount = (e.Damage / 10);
-			if(isDeepTissueInjury && !isWearingArmor){
+			If(isDeepTissueInjury && !isWearingArmor){
 				e.thing.player.mo.GiveInventory("DeepTissueInjury",e.Damage);
 				e.thing.player.mo.GiveInventory("Bleeding",bleedingAmount);
 				//e.thing.player.mo.GiveInventory("ForeignBody",shrapnelAmount);
 			}
-			if(isBurn){e.thing.player.mo.GiveInventory("Burn",e.Damage);}
-			if(isChemicalBurn){e.thing.player.mo.GiveInventory("ChemicalBurn",e.Damage);}
-			if(isInfection){e.thing.player.mo.GiveInventory("Infection",e.Damage);}
-			if(isInternalDamage){e.thing.player.mo.GiveInventory("InternalDamage",e.Damage);}
+			If(isBurn){e.thing.player.mo.GiveInventory("Burn",e.Damage);}
+			If(isChemicalBurn){e.thing.player.mo.GiveInventory("ChemicalBurn",e.Damage);}
+			If(isInfection){e.thing.player.mo.GiveInventory("Infection",e.Damage);}
+			If(isInternalDamage){e.thing.player.mo.GiveInventory("InternalDamage",e.Damage);}
 		}
-	}
-	Override void CheckReplacement(ReplaceEvent e){
-		if(e.Replacee is "SinPotionGreen"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="SinBandage";}
-		if(e.Replacee is "SinPotionRed"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="SinSuture";}
-		if(e.Replacee is "SinStimpack"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="SinOintment";}
-		if(e.Replacee is "SinMedikit"){if(cvar.GetCVar('sinsurvival_medical_replacements').getbool())e.Replacement="SinSaline";}
 	}
 }
