@@ -4,7 +4,7 @@ Class SinPowerHealing : Powerup abstract{
 	enum SinRemedy{
 		NONE = 0, //No remedy.
 		ALL = 1, //Heals everything.
-		BANDAGE = 2, //Heals everything except for Burns, Blood Loss, Infection and Internal/Organ Damage.
+		BANDAGE = 2, //Heals everything except for Blood Loss, Infection and Internal/Organ Damage.
 		ANTISEPTIC = 3, //Heals Infection.
 		OINTMENT = 4, //Heals Burns and Infection.
 		FLUID = 5, //Heals Blood Loss.
@@ -47,9 +47,9 @@ Class SinPowerHealing : Powerup abstract{
 		let hasOrganDamage = owner.FindInventory("OrganDamage");
 		let hasLaceration = owner.FindInventory("Laceration");
 		If(hasBiteWound&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("BiteWound",1);}
-		If(hasBurn&&(remedy==1||remedy==4)){owner.GiveBody(1); owner.TakeInventory("Burn",1);}
+		If(hasBurn&&(remedy==1||remedy==2||remedy==4)){owner.GiveBody(1); owner.TakeInventory("Burn",1);}
 		If(hasChemicalBurn&&(remedy==1||remedy==4)){owner.GiveBody(1); owner.TakeInventory("ChemicalBurn",1);}
-		If(hasBleeding&&(remedy==1||remedy==2)){owner.TakeInventory("Bleeding",1);}
+		If(hasBleeding&&(remedy==1||remedy==2||remedy==2)){owner.TakeInventory("Bleeding",1);}
 		If(hasBloodLoss&&(remedy==1||remedy==5)){owner.GiveBody(1); owner.TakeInventory("BloodLoss",1);}
 		If(hasBluntTrauma&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("BluntTrauma",1);}
 		If(hasDeepTissueInjury&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("DeepTissueInjury",1);}
