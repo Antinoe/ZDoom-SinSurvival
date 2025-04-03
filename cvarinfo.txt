@@ -1,3 +1,0 @@
-
-server bool sinsurvival_hotkeys = true;
-server bool sinsurvival_injury = true;
