@@ -5,7 +5,7 @@ Class SinSurvivalHotkeys : EventHandler{
 			If(!playeringame[i]||!players[i].mo){Continue;}
 			let invman=SinInvManager(players[i].mo.FindInventory("SinInvManager"));
 			If(!invman){Return 0;}
-			If(e.Type!=InputEvent.Type_KeyDown||!cvar.GetCVar("sinsurvival_hotkeys").getbool()){Return 0;}
+			If(e.Type!=InputEvent.Type_KeyDown){Return 0;}
 			int slotIndex=-1;
 			If(bindings.GetBinding(e.KeyScan)~=="slot 1"){slotIndex=0;}
 			Else If(bindings.GetBinding(e.KeyScan)~=="slot 2"){slotIndex=1;}

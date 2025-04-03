@@ -1,2 +1,2 @@
 
-GameInfo{AddEventHandlers = "SinSurvivalHotkeys","SinSurvivalMedical"}
+GameInfo{AddEventHandlers = "SinSurvivalHotkeys","SinSurvivalInjury","SinSurvivalPain","SinSurvivalStats"}

@@ -1,39 +1,73 @@
 
-//	Base Healing Class
-Class SinPowerHealing : Powerup abstract{
-	enum SinRemedy{
-		NONE = 0, //No remedy.
-		ALL = 1, //Heals everything.
-		BANDAGE = 2, //Heals everything except for Blood Loss, Infection and Internal/Organ Damage.
-		ANTISEPTIC = 3, //Heals Infection.
-		OINTMENT = 4, //Heals Burns and Infection.
-		FLUID = 5, //Heals Blood Loss.
-		VITAMIN = 6 //Heals Internal Damage and Organ Damage.
-	}
-	int remedy; property Remedy : remedy; //Type of injuries to heal, refer to SinRemedy.
-	int effectTicsMax;
+Class SinMedicine : SinPowerup{
+	int healBiteWound; property HealBiteWound : healBiteWound;
+	int healBurn; property HealBurn : healBurn;
+	int healChemicalBurn; property HealChemicalBurn : healChemicalBurn;
+	int healBleeding; property HealBleeding : healBleeding;
+	int healBloodLoss; property HealBloodLoss : healBloodLoss;
+	int healBluntTrauma; property HealBluntTrauma : healBluntTrauma;
+	int healDeepTissueInjury; property HealDeepTissueInjury : healBiteWound;
+	int healGunshotWound; property HealGunshotWound : healGunshotWound;
+	int healInfection; property HealInfection : healInfection;
+	int healInternalDamage; property HealInternalDamage : healInternalDamage;
+	int healOrganDamage; property HealOrganDamage : healOrganDamage;
+	int healLaceration; property HealLaceration : healLaceration;
 	Default{
 		Inventory.Amount 1;
-		Inventory.MaxAmount 50;
-		Powerup.Duration 175;
-		SinPowerHealing.Remedy NONE;
+		Inventory.MaxAmount 9999;
+		SinItem.Stackable 1;
+		SinItem.SpawnSaveDrives 0;
+		SinMedicine.HealBiteWound 0;
+		SinMedicine.HealBurn 0;
+		SinMedicine.HealChemicalBurn 0;
+		SinMedicine.HealBleeding 0;
+		SinMedicine.HealBloodLoss 0;
+		SinMedicine.HealBluntTrauma 0;
+		SinMedicine.HealDeepTissueInjury 0;
+		SinMedicine.HealGunshotWound 0;
+		SinMedicine.HealInfection 0;
+		SinMedicine.HealInternalDamage 0;
+		SinMedicine.HealOrganDamage 0;
+		SinMedicine.HealLaceration 0;
 	}
-	Override void PostBeginPlay(){
-		effectTicsMax = effectTics;
+	Override bool Use(bool pickup){
+		If(owner){
+			HealAffliction("BiteWound",healBiteWound);
+			HealAffliction("Burn",healBurn);
+			HealAffliction("ChemicalBurn",healChemicalBurn);
+			//HealAffliction("Bleeding",healBleeding);
+			owner.TakeInventory("Bleeding",healBleeding);
+			HealAffliction("BloodLoss",healBloodLoss);
+			HealAffliction("BluntTrauma",healBluntTrauma);
+			HealAffliction("DeepTissueInjury",healDeepTissueInjury);
+			HealAffliction("GunshotWound",healGunshotWound);
+			HealAffliction("Infection",healInfection);
+			HealAffliction("InternalDamage",healInternalDamage);
+			HealAffliction("OrganDamage",healOrganDamage);
+			HealAffliction("Laceration",healLaceration);
+			owner.TakeInventory(self.GetClass(),1);
+		}
+		Return Super.Use(pickup);
 	}
-	Override bool HandlePickup(Inventory item){
-		If(item.GetClass() == self.GetClass()){self.amount += item.amount;}
-		Return Super.HandlePickup(item);
-	}
-	Override void DoEffect(){
-		If(owner && self.effectTics == 1){
-			effectTics = effectTicsMax;
-			Heal();
+	Virtual void HealAffliction(string affliction, int healAmount){
+		If(healAmount>0){
+			let hasAffliction = owner.FindInventory(affliction);
+			if (hasAffliction){
+				int removedAmount = min(hasAffliction.amount,healAmount);
+				owner.TakeInventory(affliction,removedAmount);
+				owner.GiveBody(removedAmount);
+				//	BUG: Inaccurate method of healing. Heals more HP than expected.
+				/*
+				int heal = min(hasAffliction.amount,healAmount);
+				owner.GiveBody(heal);
+				owner.TakeInventory(affliction,heal);
+				*/
+			}
 		}
 	}
-	//	This is made virtual so you can execute your own code when healing.
-	//	If you plan on having all this run, remember to add "Super.Heal();" to the end of your code.
-	Virtual void Heal(){
+	//	NOTE: Old override. Might keep it for future references.
+	/*
+	Override bool Use(bool pickup){
 		let hasBiteWound = owner.FindInventory("BiteWound");
 		let hasBurn = owner.FindInventory("Burn");
 		let hasChemicalBurn = owner.FindInventory("ChemicalBurn");
@@ -46,88 +80,40 @@ Class SinPowerHealing : Powerup abstract{
 		let hasInternalDamage = owner.FindInventory("InternalDamage");
 		let hasOrganDamage = owner.FindInventory("OrganDamage");
 		let hasLaceration = owner.FindInventory("Laceration");
-		If(hasBiteWound&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("BiteWound",1);}
-		If(hasBurn&&(remedy==1||remedy==2||remedy==4)){owner.GiveBody(1); owner.TakeInventory("Burn",1);}
-		If(hasChemicalBurn&&(remedy==1||remedy==4)){owner.GiveBody(1); owner.TakeInventory("ChemicalBurn",1);}
-		If(hasBleeding&&(remedy==1||remedy==2||remedy==2)){owner.TakeInventory("Bleeding",1);}
-		If(hasBloodLoss&&(remedy==1||remedy==5)){owner.GiveBody(1); owner.TakeInventory("BloodLoss",1);}
-		If(hasBluntTrauma&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("BluntTrauma",1);}
-		If(hasDeepTissueInjury&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("DeepTissueInjury",1);}
-		If(hasGunshotWound&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("GunshotWound",1);}
-		If(hasInfection&&(remedy==1||remedy==3||remedy==4)){owner.GiveBody(1); owner.TakeInventory("Infection",1);}
-		If(hasInternalDamage&&(remedy==1||remedy==6)){owner.GiveBody(1); owner.TakeInventory("InternalDamage",1);}
-		If(hasOrganDamage&&(remedy==1||remedy==6)){owner.GiveBody(1); owner.TakeInventory("OrganDamage",1);}
-		If(hasLaceration&&(remedy==1||remedy==2)){owner.GiveBody(1); owner.TakeInventory("Laceration",1);}
+		If(hasBiteWound&&healBiteWound>0){owner.GiveBody(healBiteWound);owner.TakeInventory("BiteWound",healBiteWound);}
+		If(hasBurn&&healBurn>0){owner.GiveBody(healBurn);owner.TakeInventory("Burn",healBurn);}
+		If(hasChemicalBurn&&healChemicalBurn>0){owner.GiveBody(healChemicalBurn);owner.TakeInventory("ChemicalBurn",healChemicalBurn);}
+		If(hasBleeding&&healBleeding>0){owner.TakeInventory("Bleeding",healBleeding);}
+		If(hasBloodLoss&&healBloodLoss>0){owner.GiveBody(healBloodLoss);owner.TakeInventory("BloodLoss",healBloodLoss);}
+		If(hasBluntTrauma&&healBluntTrauma>0){owner.GiveBody(healBluntTrauma);owner.TakeInventory("BluntTrauma",healBluntTrauma);}
+		If(hasDeepTissueInjury&&healDeepTissueInjury>0){owner.GiveBody(healDeepTissueInjury);owner.TakeInventory("DeepTissueInjury",healDeepTissueInjury);}
+		If(hasGunshotWound&&healGunshotWound>0){owner.GiveBody(healGunshotWound);owner.TakeInventory("GunshotWound",healGunshotWound);}
+		If(hasInfection&&healInfection>0){owner.GiveBody(healInfection);owner.TakeInventory("Infection",healInfection);}
+		If(hasInternalDamage&&healInternalDamage>0){owner.GiveBody(healInternalDamage);owner.TakeInventory("InternalDamage",healInternalDamage);}
+		If(hasOrganDamage&&healOrganDamage>0){owner.GiveBody(healOrganDamage);owner.TakeInventory("OrganDamage",healOrganDamage);}
+		If(hasLaceration&&healLaceration>0){owner.GiveBody(healLaceration);owner.TakeInventory("Laceration",healLaceration);}
 		//owner.A_SetBlend("White",1,20);
 		owner.TakeInventory(self.GetClass(),1);
-	}
-}
-
-//	Items
-Class SinSurvivalStimpack : SinStimpack replaces SinStimpack{
-	Default{Health 0;}
-	Override bool Use(bool pickup){
-		If(owner){
-			let playe = SinPlayer(owner);
-			If(playe&&playe.health<playe.maxhealth){
-				owner.TakeInventory("Bleeding",10);
-				owner.GiveInventory("SinPowerStimpack",10);
-			}
-		}
 		Return Super.Use(pickup);
 	}
+	*/
 }
-Class SinPowerStimpack : SinPowerHealing{
+Class SinAnalgesic : PowerProtection{
 	Default{
-		Inventory.Icon "STIMA0";
-		SinPowerHealing.Remedy ALL;
+		Inventory.Amount 1;
+		Inventory.MaxAmount 9999;
+		Powerup.Duration 300;
+		DamageFactor "Normal",0.90;
 	}
-}
-Class SinSurvivalMedikit : SinMedikit replaces SinMedikit{
-	Default{Health 0;}
-	Override bool Use(bool pickup){
-		If(owner){
-			let playe = SinPlayer(owner);
-			If(playe&&playe.health<playe.maxhealth){
-				owner.TakeInventory("Bleeding",25);
-				owner.GiveInventory("SinPowerMedikit",25);
-			}
+	Override bool HandlePickup(Inventory item){
+		If(item.GetClass() == self.GetClass()){self.amount += item.amount;}
+		Return Super.HandlePickup(item);
+	}
+	//Override void PostBeginPlay(){amount = effectTics;}
+	Override void DoEffect(){
+		If(owner && self.effectTics == 1){
+			effectTics = 300;
+			self.amount--;
 		}
-		Return Super.Use(pickup);
-	}
-}
-Class SinPowerMedikit : SinPowerHealing{
-	Default{
-		Inventory.Icon "MEDIA0";
-		SinPowerHealing.Remedy ALL;
-	}
-}
-Class SinSurvivalBerserk : SinBerserk replaces SinBerserk{
-	Override bool Use(bool pickup){
-		If(owner){
-			let playe = SinPlayer(owner);
-			If(playe&&playe.health<playe.maxhealth){
-				owner.TakeInventory("BiteWound",100);
-				owner.TakeInventory("Burn",100);
-				owner.TakeInventory("ChemicalBurn",100);
-				owner.TakeInventory("Bleeding",100);
-				owner.TakeInventory("BloodLoss",100);
-				owner.TakeInventory("BluntTrauma",100);
-				owner.TakeInventory("DeepTissueInjury",100);
-				owner.TakeInventory("GunshotWound",100);
-				owner.TakeInventory("Infection",100);
-				owner.TakeInventory("InternalDamage",100);
-				owner.TakeInventory("Laceration",100);
-				owner.GiveInventory("SinPowerBerserk",100);
-			}
-		}
-		Return Super.Use(pickup);
-	}
-}
-Class SinPowerBerserk : SinPowerHealing{
-	Default{
-		Inventory.Icon "PSTRA0";
-		Powerup.Duration 35;
-		SinPowerHealing.Remedy ALL;
 	}
 }
